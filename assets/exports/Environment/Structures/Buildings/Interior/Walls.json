@@ -1,0 +1,21 @@
+{ "frames": {
+   "": {
+    "frame": { "x": 0, "y": 0, "w": 912, "h": 656 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 912, "h": 656 },
+    "sourceSize": { "w": 912, "h": 656 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://github.com/LibreSprite/LibreSprite/",
+  "version": "1.3",
+  "image": "E:\\Game Development\\project-topdown\\assets\\exports\\Environment\\Structures\\Buildings\\Interior\\Walls.png",
+  "format": "RGBA8888",
+  "size": { "w": 1024, "h": 1024 },
+  "scale": "1",
+  "frameTags": [
+  ]
+ }
+}

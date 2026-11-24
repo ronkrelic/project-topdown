@@ -1,0 +1,21 @@
+{ "frames": {
+   "": {
+    "frame": { "x": 0, "y": 0, "w": 640, "h": 640 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 640, "h": 640 },
+    "sourceSize": { "w": 640, "h": 640 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://github.com/LibreSprite/LibreSprite/",
+  "version": "1.3",
+  "image": "E:\\Game Development\\project-topdown\\assets\\exports\\MockUps\\Tavern.png",
+  "format": "RGBA8888",
+  "size": { "w": 1024, "h": 1024 },
+  "scale": "1",
+  "frameTags": [
+  ]
+ }
+}

@@ -1,1138 +1,532 @@
-﻿# VAELMORA: THE SHARDBOUND SAGA
-## A 2D Top-Down MMORPG — Complete Concept Document
+# BELLWAKE
+## A gothic-cozy action roguelike RPG — working title
 
----
+**Designed and Made by Relic & Ember Studios**  
+**We wake worlds.**
 
-# PART ONE: THE CORE CONCEPT
+Design edition: November 24, 2026. Original world and production specification by Ember for Relic & Ember Studios. Relic designs and gut-checks; Ember, the AI half of the two-person studio, builds and writes. BELLWAKE is a working title, not a trademark-clearance claim. This document specifies a proposed game, not an already implemented product.
 
-**Vaelmora** is a shattered world where reality itself has cracked. Long ago, a cataclysmic event called **The Sundering** fractured the continent into floating landmasses suspended in a boundless ocean of magical aether. These islands drift through a sky-ocean called **The Aetheric Sea**, connected by ancient bridges, magical portals, and airship routes. The world is held together by **The Weave**—a lattice of magical energy that binds the islands and prevents them from drifting into the void.
+**One-line pitch:** Ring the drowned kingdom's bells, steal a little peace from the returning sea, and bring enough hope home to keep a harbor village alive.
 
-The player arrives as a **Wayfarer**—a soul who has crossed from another realm through a mysterious phenomenon called **The Calling**. Wayfarers possess a unique connection to The Weave, allowing them to travel between islands, absorb aetheric energy, and ultimately shape the fate of the fractured world.
+**Format:** browser-based, top-down 2D fantasy action-adventure roguelike RPG; solo-playable first, cooperative for two to four players later. The creative scale is intimate: wet stone, familiar faces, and an impossible coastline. Persistent shared spaces are a later engineering horizon, not a requirement for the first good evening of play.
 
-**Genre:** 2D top-down action-adventure MMORPG
-**Platform:** PC (Windows/Mac/Linux), with potential console ports
-**Perspective:** Top-down 2D with painterly pixel art
-**Core Pillars:** Exploration, Choice, Community, Consequence
+### The five pillars
 
----
+**Read the danger.** An enemy commits to a visible action, the player recognizes an answer, and skill changes the result. A tiny sprite must communicate more clearly, not excuse less readable combat.
 
-# PART TWO: THE LORE
+**The tide is a choice, not a surprise.** Every expedition has a known deadline. Going deeper is attractive, but leaving early is a valid success. The interface never hides the price of another room.
 
-## The Sundering
+**Home is worth returning to.** The village grows through recovered bells, practical repairs, new residents, and relationships. Death changes what people say without making them cruel to a learning player.
 
-Three thousand years ago, the world was whole. The continent of **Vaelmora** was a single landmass ruled by the **Titanborn**—colossal beings of pure elemental energy who shaped the land with their will. The Titanborn created the mortal races as servants, each designed for a specific purpose.
+**Power has a shape.** Weapons, armor, and four currents of bell-magic produce different decisions. Permanent progress mostly opens options; it does not turn the first ten hours into an obligatory damage grind.
 
-But the Titanborn grew arrogant. They sought to harvest the **Heart of Aether**—the world's core—to fuel their ascension to godhood. The extraction destabilized reality itself. The Heart shattered into **Twelve Aetheric Shards**, each carrying a fragment of the original creative power. The continent cracked, and the Sundering began.
+**Build the harbor before the ocean.** One village, one complete biome, one boss, and the whole return loop come before online services or enormous populations. Later scale means adding bounded rooms and servers, never one infinite simulation.
 
-The Titanborn were destroyed—or so it is believed. Their remnants, the **Titanic Echoes**, linger in the deepest ruins, driven mad by the sundered world they created. The mortal races survived, scattered across the floating islands, each developing their own cultures, kingdoms, and grudges.
+All new setting material below is original to this proposal. The real asset inventory constrains presentation, not the world's mythology. Numerical values are initial tuning hypotheses with named tests; they are not measurements of an existing build. Future systems are explicitly deferred rather than presented as functioning menu entries. No part of delivery requires publishing art, changing repository settings, or creating a commit.
 
-## The Weave and the Shards
+## 1. The world and its drowning
 
-The **Weave** is the magical lattice that holds the islands together. It is maintained by the **Twelve Aetheric Shards**, each embedded in a different region of the world. These Shards are the source of all magic in Vaelmora—every spell, every enchantment, every magical creature draws from them.
+### The kingdom that would not mourn
 
-**The Shardkeepers**—an ancient order of mages, scholars, and warriors—dedicate their lives to protecting the Shards and maintaining the Weave. But the Shardkeepers are fractured:
+Once, the low kingdom of Orsail kept its dead in sound. Each town owned a bronze bell cast with a little metal from the tools of those it buried: a ferryman's pin, a midwife's needle, a carpenter's square. At dusk, the living rang the names of the newly lost. The old teaching was simple: the sea could take a body, but a person did not become nameless while another person remembered them.
 
-- **The Preservers** believe the Shards must never be touched, only guarded.
-- **The Reclaimers** believe the Shards should be used to reunite the world.
-- **The Null Covenant** seeks to destroy the Shards entirely, believing the Weave is a prison and true freedom lies in the void beyond.
+Orsail grew rich by dredging pearl beds and selling safe passage through its reef channels. Its queen, Edrane, lost her only daughter during a storm at the harbor mouth. She ordered every bell to ring until the child returned. For nine nights the kingdom made a sound no sleeper could escape. On the tenth, a figure climbed the palace steps wearing the wet coat of the missing girl. It called itself the Undertide, the keeper of everything that falls beyond recovery.
 
-## The Calling
+The Undertide offered a bargain: the child could speak with her mother once each year, if the kingdom accepted that all other deaths must still be mourned. Edrane agreed, then built a machine beneath the royal steeple to hold the visiting voice between visits. The great bells were linked to that machine. Instead of releasing a name into memory, their sound caught it in an ever-growing chorus. Families heard beloved voices again. Sailors paid for another minute with a drowned brother. Grief became a royal service, then a trade, then a necessity.
 
-Why do Wayfarers appear in Vaelmora? The answer is tied to the Shards. When a Shard is damaged or its region falls into imbalance, it sends out a **Call**—a resonance through The Weave that pulls souls from other worlds. These souls become Wayfarers, granted immortality (they respawn at **Wayfarer's Rest** locations) and a deep connection to the Weave.
+The sea did not drown Orsail because mourning was wrong. It came because the kingdom refused to let any ending end. When the trapped chorus became louder than the living city, the Undertide withdrew the shore. Water filled the streets before dawn. Edrane's machine still rang below, holding the dead at the instant before departure. The old kingdom has lain drowned for six generations.
 
-The truth—revealed slowly through the main story—is that the Shards are not just power sources. They are **prisons**. Each Shard contains a fragment of a **Titanborn consciousness**. The Titanborn are not dead—they are trapped within the Shards, dreaming, waiting. And the Null Covenant knows this. They seek to destroy the Shards not to free the world, but to free the Titanborn—an act that would annihilate all mortal life.
+Each night the sea draws back for a few hours. People call this the **Ebb**. Roads shine like fish scales; windows empty themselves; stairwells breathe. The retreat is not a normal astronomical tide. It is the Undertide's remaining half of the broken bargain: time in which the living may descend and decide what to do with what they cannot keep. By day, there is only open water.
 
-## The Titanborn: A Closer Look
+### The bond of the Bellringers
 
-The Titanborn were not gods, but something older—beings of pure elemental force that predated mortal life. Each Titanborn embodied a fundamental aspect of reality:
+A sworn order tried to dismantle the machine during the drowning. Its members tied bell ropes around their wrists and promised the sea that no lost name would be abandoned while a ringer remained. The Undertide accepted the promise literally. A Bellringer taken by blade, stone, or tide is returned to the beach at dawn, breathing seawater and remembering the end. The bond restores the person, not their pack, and does not extend to every civilian or animal.
 
-| Titanborn | Domain | Current State |
-|-----------|--------|---------------|
-| **Vaelthar** | Life and Growth | Dreaming in the Verdant Heart |
-| **Ignar** | Fire and Destruction | Nightmares fuel Emberfall's volcanoes |
-| **Nerith** | Water and Memory | Trapped in the Tidal Pearl |
-| **Frosta** | Ice and Preservation | Frozen in the Heart of Winter |
-| **Terran** | Earth and Structure | Slumbering in the World Pillar |
-| **Zephyr** | Air and Freedom | Drifting in the Skyheart |
-| **Umbra** | Shadow and Secrets | Whispering in the Shadowstone |
-| **Lumina** | Light and Truth | Bound to the Dawnstone |
-| **Decaya** | Decay and Rebirth | Rooted in the Rotheart |
-| **Chronos** | Time and Fate | Locked in the Timepiece |
-| **Morphea** | Dreams and Nightmares | Wandering the Dreamstone |
-| **Null** | Void and Nothingness | Corrupted, seeking to unmake reality |
+The order is almost gone. Its survivors live in **Wickharbor**, a village on the cliffs above Orsail. They repair ropes, copy tide tables, argue over soup, and go down again. The player is a newly sworn Bellringer whose identity before the oath is chosen through optional dialogue, not an amnesia mystery. They may have been a sailor, a clerk, or a local; these are roleplaying descriptions without exclusive statistical bonuses in the first release.
 
----
+The great bells have fallen silent. The Drowned no longer settle when the Ebb begins. Recovering a bell does not mean placing a five-ton object in a backpack: the Bellringer retrieves its clapper or name-cylinder, restores the installation below, and marks it for a village salvage team during a later safe window. The team brings home smaller bells physically. Great bells remain rooted in the kingdom and become permanent sounded landmarks.
 
-# PART THREE: THE WORLD
+### Geography and everyday life
 
-## The Aetheric Sea
+Wickharbor has a tavern called the Warm Nail, a bell yard, a smith's lean-to, an alchemy room, a sawmill gantry, and a narrow beach reached by a counterweighted stair. Fishing, ropework, drying kelp, and repairing other people's bad boats keep the place alive. The joke is that everyone in the village owns half a boat and owes someone the other half.
 
-The world is divided into **twelve major regions**, each anchored by an Aetheric Shard. Between these regions lies the **Aetheric Sea**—a swirling ocean of magical energy where reality is unstable. Travel through the Aetheric Sea is possible only via:
+Below lie five planned areas. The **Undercroft** is a network of old burial passages with trapped air beneath the waterline; szadiart's catacomb art makes it the first biome. The **Sluiceward** comprises drowned service streets and cisterns, built from anokolisa dungeon sheets and selected water tiles. The **Knife Reefs** later expose wreck paths and living raider camps. The **Cathedral of Held Breath** houses the largest surviving choir mechanism. The **Deep Steeple** descends rather than rises, ending at the royal machine. The last three require new environment art and are story destinations, not available slice maps.
 
-- **Aether Bridges**—ancient stone pathways that connect certain islands
-- **Airship Routes**—maintained by the **Skyfarer's Guild**
-- **Waygates**—magical portals activated by Wayfarers
-- **Drift-Sailing**—navigating the Aetheric currents on small vessels (endgame travel)
+The bells are not gods and the Undertide is not an evil final boss waiting for a health bar. It is an intelligence with a function, capable of bargaining but not understanding why a short human life wants one more conversation. The central question is whether remembrance must preserve a voice, release it, or change the relationship between the living and the dead altogether.
 
-## The Twelve Regions
+## 2. Research and the shape of an evening
 
-### 1. Verdant Reach (Heart of Nature)
+Research informs decisions without supplying this world's names or plot. The source register in Appendix A distinguishes official descriptions, technical documentation, and our inferences. Exact session targets below are BELLWAKE design goals, not claimed industry averages: the inspected pages do not establish reliable median run lengths for the reference games.
 
-**Theme:** Untamed wilderness, primal magic, druidic traditions
-**Shard:** The Verdant Heart (Life)
-**Titanborn:** Vaelthar
-**Climate:** Perpetual spring, overgrown ruins, colossal trees
+Hades' official material connects fast action with a persistent, progressing story. The lesson is to make return part of authorship: people react to a failed expedition, a discovered inscription, or a brave early retreat. Dead Cells explicitly emphasizes pattern-based enemies, alternate paths, permadeath, and repeated learning. We adopt clear commitments, quick restart, and route choice, not its platforming controls.
 
-Verdant Reach is a land where nature has reclaimed civilization. Ancient cities are now forests, their stone bones wrapped in vines. The **Wildborn** (beastfolk) and **Sylvan** (elf-like beings) coexist here in a tense alliance, protecting the Verdant Heart from those who would exploit it.
+The Binding of Isaac: Rebirth's description of randomized action and ability-changing treasure supports a small combinatorial item system. We take that principle, not its enormous item count or exact generation algorithm. Enter the Gungeon foregrounds dodge rolling and dungeon combat. Here the roll crosses a known threat window and leaves a recovery commitment; it does not authorize unreadable projectile carpets in narrow melee rooms.
 
-**Key Locations:**
-- **Thornwall** (Capital): A city built within the hollowed trunk of the World Tree, a colossal oak that predates the Sundering. Population: 50,000. Ruled by the **Circle of Roots**, a council of druids and beast-lords.
-- **The Withering Glade:** A corrupted forest where a lesser Titanborn's nightmare has twisted the flora into predatory shapes.
-- **Rootway Tunnels:** An underground network of roots and caverns connecting Verdant Reach to the **Sunken Warrens** below.
-- **The Verdant Heart:** A massive tree at the center of the region, its branches reaching into the sky. The Shard pulses within its trunk.
+Top-down Zelda is a spatial reference: enemies and objects make encounters into readable problems. Nintendo's Echoes of Wisdom page emphasizes creative combinations for traversal and fighting. Our “combat chess” means a plate bearer closes one lane while a caster threatens another, with the player choosing which piece to dislodge first. It is a design interpretation, not a claim to have inspected Nintendo's AI implementation.
 
-**Town NPCs (Thornwall):**
-- **Elder Marenth** (Sylvan Druid): Quest-giver for the main Verdant Reach storyline. She senses the Verdant Heart is weakening and suspects Null Covenant interference. "The forest remembers what we have forgotten. Listen."
-- **Bramble** (Wildborn Boar-Man Blacksmith): Gruff but kind. Crafts nature-infused weapons. "You break, I fix. Simple. Now stop bleeding on my anvil."
-- **Lirael** (Sylvan Herbalist): Sells potions and poisons. Runs a side-quest about her missing sister, last seen near the Withering Glade. "My sister wouldn't just vanish. She was too stubborn for that."
-- **Captain Thorn** (Wildborn Wolf-Woman Guard Captain): Quest-giver for bounty hunting and territorial defense. Distrusts outsiders but respects strength. "You're new. You smell like aether and trouble. Prove you're useful."
-- **Old Grick** (Human Hermit): A former Shardkeeper who abandoned his post. Drunk most of the time, but holds crucial lore about the Verdant Heart's true nature. "You want to know the secret? The secret is... *hic*... the secret is that there is no secret. It's all just... leaves."
-- **Sprocket** (Gnome Tinkerer): Runs a workshop selling gadgets and explosives. Comic relief NPC with a surprising tragic backstory involving the Null Covenant. "This device will either save your life or explode. I'm 60% sure which."
-- **The Root Singers** (Three Sylvan NPCs): A musical trio who provide buffs when players donate to their performance. Hidden quest: They are actually spies for the Null Covenant.
-
-**Side Quests:**
-- **The Missing Sister:** Find Lirael's sister in the Withering Glade, uncover a Null Covenant experiment.
-- **The Drunk's Secret:** Help Old Grick remember the location of a hidden Shardkeeper vault.
-- **The Root Singers' Betrayal:** Expose the spies without alerting the Null Covenant.
-
----
+Soul Knight's official app listing explicitly offers two-to-four-person multiplayer and accessible top-down action with randomized dungeons. It supports our cooperative product shape without prescribing its netcode. Vampire Survivors' official description connects survival, gold collection, and later upgrades. We borrow escalating pressure and clear reward feedback, while rejecting automatic attacks and unlimited enemy swarms for the first slice. Moonlighter's adventurer/shopkeeper premise and Children of Morta's family-centered story reinforce the value of a home loop. Wickharbor is not a full shop simulator or a roster of playable relatives.
 
-### 2. Emberfall (Heart of Fire)
-
-**Theme:** Volcanic wasteland, forge-cities, honor-bound warrior culture
-**Shard:** The Ember Core (Fire)
-**Titanborn:** Ignar
-**Climate:** Scorched earth, rivers of lava, perpetual ashfall
-
-Emberfall is a land of fire and iron. The **Forgeborn** (dwarf-like beings of stone and flame) and the **Drakkin** (dragon-descended humanoids) rule here, their civilizations built around volcanic forges and ancient dragon lairs. The Ember Core pulses at the heart of the **Cinder Throne**, a volcano that has never fully erupted—but could at any moment.
-
-**Key Locations:**
-- **Ironhold** (Capital): A fortress-city carved into the mountainside. Population: 40,000. Ruled by the **Council of Flames**, a meritocracy where the best smiths and warriors hold power.
-- **The Cinder Throne:** The volcano containing the Ember Core. Accessible only to those who complete the **Trial of Embers**—a series of combat and crafting challenges.
-- **Ashfall Wastes:** An open PvP zone where Drakkin clans wage ritual warfare. Resources are rich here, but danger is constant.
-- **The Molten Forge:** A legendary crafting station powered by the Ember Core itself. Only accessible during special events.
-
-**Town NPCs (Ironhold):**
-- **High Forgemaster Durn** (Forgeborn): Leader of the Council of Flames. Quest-giver for the Emberfall main storyline. His daughter has been kidnapped by a rogue Drakkin clan. "Honor is forged in fire. So is revenge."
-- **Kaelith** (Drakkin Warrior): A wandering duelist who offers combat training and PvP quests. "You fight like a wet noodle. Come back when you can actually hit me."
-- **Mira Coppervein** (Forgeborn Merchant): Sells ore and crafting materials. Runs a quest about a stolen shipment of star-metal. "That shipment was worth more than your entire village. No offense."
-- **The Ash Priests** (Three Forgeborn NPCs): Keepers of the funeral rites. Offer resurrection buffs and lore about the Titanborn's death. "All flames must fade. But some... some are remembered."
-- **Skarva** (Drakkin Outcast): A former clan leader exiled for refusing to sacrifice prisoners. Quest-giver for a redemption arc. "I chose honor over victory. Now I have neither."
-- **Tinker** (Gnome Inventor): Sells siege weapons and traps. Obsessed with building a "better airship." His prototypes keep crashing. "Theoretically, this should work. Theoretically."
-
-**Side Quests:**
-- **The Forgemaster's Daughter:** Rescue Durn's daughter from the Ashfall Wastes.
-- **The Star-Metal Heist:** Track down the stolen star-metal shipment.
-- **The Exile's Redemption:** Help Skarva regain his honor and clan.
+A complete single-biome Ebb targets **18–24 minutes active play**, with **3–5 minutes at home**. The vertical slice targets **12–16 minutes active play**. First-time teaching may add five minutes outside the active tide clock. Long-term two-biome expeditions target 24–32 minutes by shortening early rooms rather than merely doubling everything. Record actual completion distributions before locking room count. No source is cited as proof that these exact numbers guarantee retention.
 
----
-
-### 3. Tidal Sovereign (Heart of Water)
-
-**Theme:** Ocean archipelago, pirate politics, ancient submerged cities
-**Shard:** The Tidal Pearl (Water)
-**Titanborn:** Nerith
-**Climate:** Tropical storms, coral reefs, deep ocean trenches
-
-Tidal Sovereign is a scattered archipelago of islands connected by ferries and underwater tunnels. The **Meridian** (merfolk) and **Tidecaller** (human/elf sea-nomads) dominate the surface and shallows, while the **Abyssal** (deep-sea horrors) lurk in the trenches. The Tidal Pearl rests in the **Sunken Cathedral**, an ancient temple at the bottom of the **Abyss Trench**.
-
-**Key Locations:**
-- **Port Meridian** (Capital): A floating city built on the backs of colossal turtles. Population: 35,000. A den of pirates, merchants, and spies. Ruled by the **Tide Council**, a group of merchant lords and pirate captains.
-- **The Sunken Cathedral:** An underwater dungeon accessible only with water-breathing equipment or Meridian heritage. Contains the Tidal Pearl and the **Drowned Choir**, undead priests who guard it.
-- **Corsair's Cove:** A lawless pirate haven. Open PvP zone with rare smuggling quests.
-- **The Abyss Trench:** The deepest point in the Aetheric Sea. Something ancient stirs there.
-
-**Town NPCs (Port Meridian):**
-- **Admiral Vex** (Tidecaller Pirate Queen): Rules the port with an iron fist and a silver tongue. Quest-giver for the Tidal Sovereign storyline. She seeks the Sunken Cathedral's treasure—but doesn't know what's actually down there. "Every treasure has a story. Every story has a price."
-- **Finnick** (Meridian Fence): Sells stolen goods and information. Quest-giver for smuggling runs. "No questions asked. Well, maybe one or two. Okay, definitely some questions."
-- **Coralia** (Meridian Priestess): Keeper of the Drowned Choir's lore. Warns against disturbing the Sunken Cathedral. Secretly a Shardkeeper agent. "The deep does not forgive. The deep does not forget."
-- **Barnaby "Barnacle" Binks** (Human Drunk): A former pirate captain who lost his ship and crew. Quest-giver for a comedic revenge plot against Admiral Vex. "I was a captain once. A great captain! Then... then the turtles happened."
-- **The Tide Singers** (Meridian Bard Trio): Provide water-breathing buffs and lore about the Tidal Pearl. Their songs can calm storms.
-- **Old Man Wheeze** (Tidecaller Fisherman): Sells fishing supplies and tells tall tales. One of his "tall tales" is actually a hint to a hidden treasure. "I once caught a fish THIS big! No, really! It had a treasure chest in its stomach!"
-
-**Side Quests:**
-- **The Sunken Treasure:** Help Admiral Vex find the Sunken Cathedral, only to discover its true nature.
-- **Barnaby's Revenge:** Help Barnaby recover his ship from Admiral Vex.
-- **The Drowned Choir's Song:** Learn the truth about the undead priests guarding the Tidal Pearl.
-
----
-
-### 4. Frostveil (Heart of Ice)
-
-**Theme:** Frozen tundra, ice palaces, ancient secrets preserved in ice
-**Shard:** The Frozen Tear (Ice)
-**Titanborn:** Frosta
-**Climate:** Blizzards, glaciers, aurora-lit nights
-
-Frostveil is a land of eternal winter, where the **Frostborn** (ice-elemental humanoids) and **Northmen** (hardy humans) survive in glacier-carved cities. The Frozen Tear is embedded in the **Heart of Winter**, a colossal glacier that holds the frozen remains of a Titanborn—and the secrets of the Sundering itself.
-
-**Key Locations:**
-- **Glacius** (Capital): A city carved entirely from ice, illuminated by captured auroras. Population: 25,000. Ruled by the **Frost Council**, a group of elders who speak for the dead.
-- **The Heart of Winter:** A massive glacier dungeon. The Frozen Tear is at its center, guarded by the **Frostbound**—undead warriors frozen in eternal service.
-- **The Howling Pass:** A treacherous mountain route connecting Frostveil to Emberfall. Open-world PvP zone with blizzard mechanics that reduce visibility.
-- **The Memory Vaults:** A hidden chamber where the Frostborn preserve the memories of the dead in ice sculptures.
-
-**Town NPCs (Glacius):**
-- **Elder Sigrun** (Northman Shaman): Leader of the Frost Council. Quest-giver for the Frostveil storyline. She has visions of the Titanborn awakening and seeks to prevent it. "The ice remembers. The ice warns. But do we listen?"
-- **Frostmaw** (Frostborn Warrior): A hulking ice-being who speaks in riddles. Quest-giver for combat trials. "Cold kills. You are warm. Therefore, you are prey. Prove otherwise."
-- **Dr. Elara Voss** (Human Archaeologist): Studying the frozen Titanborn. Quest-giver for lore-heavy quests. Her research has made her a target for the Null Covenant. "This is the discovery of a lifetime! Also, possibly the death of me."
-- **Bjorn the Bold** (Northman Hunter): Sells pelts and survival gear. Quest-giver for monster hunts. "The yetis are getting bolder. Also, I'm getting colder. Mostly the yetis."
-- **The Ice Weavers** (Three Frostborn Crafters): Sell ice-themed gear. Hidden quest: They are preserving the memories of the dead in ice sculptures.
-
-**Side Quests:**
-- **The Frozen Memories:** Help the Ice Weavers preserve a dying elder's memories.
-- **Dr. Voss's Research:** Protect Dr. Voss from Null Covenant assassins.
-- **The Titanborn's Dream:** Enter the frozen Titanborn's dream and learn the truth about the Sundering.
-
----
-
-### 5. Stoneheart (Heart of Earth)
-
-**Theme:** Underground caverns, crystal cities, ancient mining operations
-**Shard:** The Stoneheart (Earth)
-**Titanborn:** Terran
-**Climate:** Subterranean, glowing crystals, underground rivers
-
-Stoneheart is a vast underground realm beneath the other regions. The **Deepborn** (gnome-like subterranean beings) and **Stonewarden** (golem-like constructs) maintain the caverns, mining crystals and guarding ancient secrets. The Stoneheart Shard is embedded in the **World Pillar**, a colossal stalactite that supports the ceiling of the cavern.
-
-**Key Locations:**
-- **Crystalfall** (Capital): A city built around a massive glowing crystal formation. Population: 30,000. Ruled by the **Gem Council**, a group of merchant princes and master miners.
-- **The World Pillar:** A dungeon that descends deep into the earth. The Stoneheart Shard is at its base, guarded by the **Stonewarden Prime**—an ancient golem that has gone mad.
-- **The Echoing Deeps:** A massive open cavern where sound behaves strangely. Home to the **Echo Bats**, creatures that mimic voices. Open-world PvP zone.
-- **The Crystal Gardens:** A hidden area where crystals grow like plants. Extremely rare crafting materials.
-
-**Town NPCs (Crystalfall):**
-- **Gem Prince Aldric** (Deepborn): Leader of the Gem Council. Quest-giver for the Stoneheart storyline. He seeks to expand mining operations—but something is stirring in the deep. "The deeper we dig, the more we find. The more we find, the more we fear."
-- **Boulder** (Stonewarden): A golem who has gained sentience. Quest-giver for philosophical quests about the nature of life. "I think, therefore I... am? Is that correct? I am still learning."
-- **Nyx** (Deepborn Thief): Runs the black market. Quest-giver for heist missions. "You didn't see me. I wasn't here. This conversation never happened."
-- **Professor Cogsworth** (Gnome Scholar): Studies the Echo Bats. Quest-giver for research quests. His experiments keep going horribly wrong. "The bats are trying to communicate! Or they're mocking me. Hard to tell."
-- **The Crystal Choir** (Deepborn Bard Trio): Their songs can reshape crystal formations. Provide mining buffs.
-
-**Side Quests:**
-- **The Stonewarden's Question:** Help Boulder understand the meaning of existence.
-- **The Echo Bat Experiment:** Assist Professor Cogsworth with his research (and prevent disaster).
-- **The Deep Market:** Help Nyx pull off a heist on the Gem Council's vault.
-
----
-
-### 6. Skyreach (Heart of Air)
-
-**Theme:** Floating islands, sky-pirate clans, ancient cloud cities
-**Shard:** The Skyheart (Air)
-**Titanborn:** Zephyr
-**Climate:** Perpetual wind, floating islands, cloud seas
-
-Skyreach is a region of floating islands drifting above the Aetheric Sea. The **Aetherborn** (winged humanoids) and **Skyfarer** (human/elf airship crews) navigate the winds, trading and raiding. The Skyheart Shard is embedded in the **Cloud Throne**, a massive floating palace that drifts through the region.
-
-**Key Locations:**
-- **Windholm** (Capital): A city built on the largest floating island. Population: 20,000. Ruled by the **Sky Council**, a group of airship captains and Aetherborn elders.
-- **The Cloud Throne:** A floating dungeon that moves through Skyreach. The Skyheart Shard is at its center, guarded by the **Wind Wraiths**—air elementals that test intruders.
-- **The Turbulence:** A region of violent windstorms. Open-world PvP zone with wind mechanics that push players around.
-- **The Skyfarer's Guildhall:** Headquarters of the airship guild. Provides airship transport and quests.
-
-**Town NPCs (Windholm):**
-- **Captain Zephyr** (Aetherborn Sky Captain): Leader of the Sky Council. Quest-giver for the Skyreach storyline. She seeks to chart a safe route through the Turbulence. "The sky is not a limit. It's a destination."
-- **Gale** (Aetherborn Scout): A young winged warrior eager to prove herself. Quest-giver for exploration quests. "I can fly higher than anyone! Watch me!"
-- **Bixby** (Human Airship Mechanic): Barnaby Binks' cousin. Runs the airship dock. Quest-giver for airship repair missions. "If it's flying, I can fix it. If it's not flying, I can probably still fix it. No promises."
-- **The Wind Whisperers** (Aetherborn Bard Trio): Their songs can calm the winds. Provide flight buffs.
-
-**Side Quests:**
-- **The Turbulence Route:** Help Captain Zephyr chart a safe path through the Turbulence.
-- **Gale's Trial:** Help Gale prove herself in a dangerous aerial race.
-- **Bixby's Prototype:** Test Bixby's experimental airship (and try not to die).
-
----
-
-### 7. Umbral Depths (Heart of Shadow)
-
-**Theme:** Dark caverns, shadow magic, forbidden knowledge
-**Shard:** The Shadowstone (Shadow)
-**Titanborn:** Umbra
-**Climate:** Lightless, whispers in the dark, shifting shadows
-
-Umbral Depths is a lightless realm beneath Stoneheart, where the **Shadeborn** (shadow-elemental humanoids) and **Umbral Scholars** (humans/elves who have embraced darkness) study forbidden magic. The Shadowstone Shard is hidden in the **Black Cathedral**, a temple dedicated to a forgotten god of darkness.
-
-**Key Locations:**
-- **Nightreach** (Capital): A city of darkness, illuminated only by bioluminescent fungi and shadow-crystals. Population: 15,000. Ruled by the **Shadow Conclave**, a group of archmages and shadow-priests.
-- **The Black Cathedral:** A dungeon of shifting corridors and shadow-traps. The Shadowstone Shard is at its altar, guarded by the **Nightmare**—a manifestation of the Titanborn's fear.
-- **The Whispering Chasm:** A vast underground void where voices can be heard. Open-world PvP zone with fear mechanics.
-- **The Forbidden Library:** A hidden repository of dark knowledge. Contains quests for unlocking forbidden spells.
-
-**Town NPCs (Nightreach):**
-- **Archmage Vell** (Umbral Scholar): Leader of the Shadow Conclave. Quest-giver for the Umbral Depths storyline. He seeks to master the Shadowstone—but the Shadowstone may be mastering him. "Knowledge is power. Forbidden knowledge is... more power. And also, probably, madness."
-- **Shade** (Shadeborn Assassin): A mysterious figure who speaks in whispers. Quest-giver for stealth missions. "In darkness, all truths are revealed. Also, all assassinations."
-- **Lumina** (Human Light-Cleric): A rare light-worshipper in a city of shadows. Quest-giver for a redemption arc. "The light can reach even here. You just have to look."
-- **The Whispering Chorus** (Shadeborn Bard Trio): Their songs can induce fear or calm. Provide shadow-magic buffs.
-
-**Side Quests:**
-- **The Forbidden Library:** Help Archmage Vell unlock the library's secrets (and prevent him from going mad).
-- **Lumina's Light:** Help Lumina bring hope to the darkness.
-- **The Nightmare's Fear:** Confront the Nightmare in the Black Cathedral.
-
----
-
-### 8. Radiant Spire (Heart of Light)
-
-**Theme:** Floating cathedral-city, holy orders, divine magic
-**Shard:** The Dawnstone (Light)
-**Titanborn:** Lumina
-**Climate:** Perpetual dawn, golden light, floating crystal spires
-
-Radiant Spire is a realm of eternal dawn, where the **Luminari** (angelic humanoids) and **Dawnsworn** (human/elf paladins) protect the Dawnstone Shard. The region is a single massive spire that rises from the Aetheric Sea into the sky, with the Shard at its peak in the **Cathedral of Dawn**.
-
-**Key Locations:**
-- **Aurora** (Capital): A city of white marble and gold, built around the base of the Spire. Population: 30,000. Ruled by the **High Chorister**, a divine monarch who claims to speak for the Light itself.
-- **The Cathedral of Dawn:** A dungeon of holy trials. The Dawnstone Shard is at the altar, guarded by the **Seraphim**—angelic guardians who test the worthy.
-- **The Penumbra:** A region of eternal twilight at the edge of Radiant Spire. Open-world PvP zone where light and shadow clash.
-- **The Hall of Mirrors:** A mysterious chamber where the Dawnstone's light reveals hidden truths.
-
-**Town NPCs (Aurora):**
-- **High Chorister Seraphina** (Luminari): Divine ruler of Radiant Spire. Quest-giver for the main storyline. She believes she is destined to reunite the world—but her visions may be corrupted. "The Light shows us the way. But sometimes... the way is dark."
-- **Sir Aldric** (Human Paladin): A knight of the Dawnsworn. Quest-giver for holy quests. "The Light guides us. Also, I'm lost. Can you point me to the cathedral?"
-- **Sister Mira** (Human Healer): Runs the infirmary. Quest-giver for healing quests. "You're bleeding. Again. What did you do this time?"
-- **The Dawn Chorus** (Luminari Bard Trio): Their songs can heal and inspire. Provide holy buffs.
-
-**Side Quests:**
-- **Seraphina's Vision:** Investigate the corruption in Seraphina's visions.
-- **Sir Aldric's Lost Squad:** Find Sir Aldric's missing squad in the Penumbra.
-- **The Hall of Mirrors:** Discover the truth hidden within the Dawnstone's light.
-
----
-
-### 9. Mirefen (Heart of Decay)
-
-**Theme:** Swampland, necromancy, decay and rebirth
-**Shard:** The Rotheart (Decay)
-**Titanborn:** Decaya
-**Climate:** Humid, foggy, overgrown ruins, stagnant water
-
-Mirefen is a vast swamp where life and death blur together. The **Bogborn** (amphibious humanoids) and **Rotwardens** (necromancer-priests) maintain a balance between decay and renewal. The Rotheart Shard is embedded in the **Bone Tree**, a colossal dead tree that still bears fruit—fruit that grants visions of death.
-
-**Key Locations:**
-- **Fenwick** (Capital): A city built on stilts above the swamp. Population: 18,000. Ruled by the **Rot Council**, a group of necromancer-priests and bog-lords.
-- **The Bone Tree:** A dungeon of rot and rebirth. The Rotheart Shard is at its roots, guarded by the **Rotfather**—a massive fungal creature that claims to be the Titanborn's gardener.
-- **The Drowning Marsh:** A region of deep water and hidden dangers. Open-world PvP zone with drowning mechanics.
-- **The Garden of Flesh:** A hidden area where the Rotfather tends to his "children"—fungal creatures of all shapes and sizes.
-
-**Town NPCs (Fenwick):**
-- **Rotfather Malachai** (Human Necromancer): Leader of the Rot Council. Quest-giver for the Mirefen storyline. He seeks to understand the Rotheart's true purpose—but his experiments are attracting unwanted attention. "Life and death are just two sides of the same coin. I'm simply... flipping it."
-- **Gribble** (Bogborn Merchant): Sells swamp-themed gear and potions. Quest-giver for ingredient-gathering quests. "You want the good stuff? Gribble has the good stuff. Gribble always has the good stuff."
-- **Sister Decay** (Bogborn Priestess): Tends to the dying. Quest-giver for mercy-killing quests. "Death is not the end. It is simply... a change of address."
-- **The Rot Chorus** (Bogborn Bard Trio): Their songs can poison or heal. Provide decay-magic buffs.
-
-**Side Quests:**
-- **The Rotfather's Garden:** Help Rotfather Malachai tend to his "children."
-- **Gribble's Ingredients:** Gather rare swamp ingredients for Gribble's potions.
-- **Sister Decay's Mercy:** Help Sister Decay ease the suffering of the dying.
-
----
-
-### 10. Chronos Reach (Heart of Time)
-
-**Theme:** Temporal anomalies, ancient ruins, clockwork mechanisms
-**Shard:** The Timepiece (Time)
-**Titanborn:** Chronos
-**Climate:** Shifting seasons, frozen moments, accelerated decay
-
-Chronos Reach is a region where time itself is unstable. The **Chronon** (time-elemental humanoids) and **Temporal Scholars** (humans/elves who study time magic) attempt to maintain order. The Timepiece Shard is embedded in the **Clockwork Citadel**, a massive mechanical fortress that exists in multiple time periods simultaneously.
-
-**Key Locations:**
-- **Epoch** (Capital): A city that shifts between past, present, and future. Population: 22,000. Ruled by the **Temporal Council**, a group of chronomancers and clockwork engineers.
-- **The Clockwork Citadel:** A dungeon of temporal puzzles. The Timepiece Shard is at its center, guarded by the **Chronoguard**—clockwork golems that exist outside of time.
-- **The Fractured Hour:** A region where time loops endlessly. Open-world PvP zone with time-loop mechanics.
-- **The Moment Frozen:** A hidden area where a single moment in time has been preserved. Contains unique quests and lore.
-
-**Town NPCs (Epoch):**
-- **Chronomancer Vex** (Chronon): Leader of the Temporal Council. Quest-giver for the Chronos Reach storyline. She has seen a future where the world ends—and she's trying to prevent it. "I have seen tomorrow. It is not kind. But it is not fixed, either."
-- **Tick** (Clockwork Golem): A sentient clockwork being. Quest-giver for repair missions. "Tick tock. Tick tock. I am running out of... something. Probably time."
-- **Professor Paradox** (Human Temporal Scholar): Studies time paradoxes. Quest-giver for mind-bending quests. "I've already given you this quest. And I will give it to you again. And again. And again."
-- **The Clockwork Chorus** (Chronon Bard Trio): Their songs can speed up or slow down time. Provide temporal buffs.
-
-**Side Quests:**
-- **Vex's Vision:** Help Chronomancer Vex prevent the dark future she has seen.
-- **Tick's Tock:** Help Tick find a replacement power source before he winds down.
-- **Paradox's Problem:** Solve a time paradox without causing a bigger one.
-
----
-
-### 11. Dreamweave (Heart of Dreams)
-
-**Theme:** Dreamscapes, illusion magic, sleeping gods
-**Shard:** The Dreamstone (Dream)
-**Titanborn:** Morphea
-**Climate:** Shifting landscapes, surreal geometry, floating islands
-
-Dreamweave is a realm that exists within the dreams of the sleeping Titanborn. The **Dreamborn** (dream-elemental humanoids) and **Oneironauts** (dream-walkers) navigate the shifting landscapes. The Dreamstone Shard is embedded in the **Sleeping City**, a massive city that exists only in dreams.
-
-**Key Locations:**
-- **Reverie** (Capital): A city that shifts based on the dreams of its inhabitants. Population: 12,000. Ruled by the **Dream Council**, a group of dream-weavers and illusionists.
-- **The Sleeping City:** A dungeon of shifting geometry. The Dreamstone Shard is at its center, guarded by the **Nightmare King**—the manifestation of the Titanborn's worst fears.
-- **The Lucid Sea:** A region where dreams become reality. Open-world PvP zone with illusion mechanics.
-- **The Dreamer's Sanctum:** A hidden area where the Titanborn's consciousness can be directly communicated with.
-
-**Town NPCs (Reverie):**
-- **Dreamweaver Lyra** (Dreamborn): Leader of the Dream Council. Quest-giver for the Dreamweave storyline. She seeks to wake the Titanborn—but doesn't realize what that would mean. "Dreams are the truth we hide from ourselves. What do you hide from?"
-- **Sandman** (Dreamborn Merchant): Sells dream-themed gear and potions. Quest-giver for dream-gathering quests. "Sleep is the best medication. Also, I sell sleep. Buy my sleep."
-- **Professor Freud** (Human Oneironaut): Studies dreams. Quest-giver for psychological quests. "Tell me about your mother. No, seriously. She's in the Dreamstone. We need to rescue her."
-- **The Dream Chorus** (Dreamborn Bard Trio): Their songs can induce sleep or wakefulness. Provide dream-magic buffs.
-
-**Side Quests:**
-- **Lyra's Awakening:** Help Dreamweaver Lyra understand the true nature of the Titanborn's dreams.
-- **Sandman's Sleep:** Help Sandman harvest dreams without causing nightmares.
-- **Freud's Mother:** Rescue Professor Freud's mother from the Dreamstone.
-
----
-
-### 12. Void's Edge (Heart of Void)
-
-**Theme:** The edge of reality, nothingness, the Null Covenant
-**Shard:** The Voidstone (Void)
-**Titanborn:** Null (Corrupted)
-**Climate:** Lightless, silent, reality-breaking
-
-Void's Edge is the region at the edge of the Aetheric Sea, where reality breaks down. The **Voidborn** (void-elemental humanoids) and the **Null Covenant** (cultists who seek to destroy the Shards) dwell here. The Voidstone Shard is hidden in the **Null Sanctum**, a fortress of pure nothingness.
+For generation, authored rooms connected by a mission graph give two creators control over fair attacks, exits, and tempo. BSP is useful for partitioning large floor plans but does not itself author a good fight. Wave Function Collapse produces locally coherent patterns, not guaranteed critical-path connectivity or a readable boss approach. Start with room templates; reserve BSP for later corridor experiments and WFC for validated decorative fills. The returning tide supplies variation through route pressure without requiring an infinite procedural world.
 
-**Key Locations:**
-- **Nihilus** (Capital): A city of shadows and silence. Population: 8,000. Ruled by the **Null Council**, a group of void-priests and reality-breakers.
-- **The Null Sanctum:** A dungeon of pure void. The Voidstone Shard is at its center, guarded by the **Void Titan**—a Titanborn that has been corrupted by the void.
-- **The Event Horizon:** A region where reality breaks down. Open-world PvP zone with void mechanics that can delete players from existence (temporarily).
-- **The Edge of Nothing:** A hidden area where the true nature of the void can be glimpsed.
-
-**Town NPCs (Nihilus):**
-- **High Priest Nihil** (Voidborn): Leader of the Null Council. Quest-giver for the Void's Edge storyline. He believes that destroying the Shards will free the world from the Titanborn's prison—but he's wrong. "Nothing is true. Everything is permitted. Especially nothing."
-- **Echo** (Voidborn Merchant): Sells void-themed gear and potions. Quest-giver for void-gathering quests. "Everything comes from nothing. Nothing comes from everything. Buy my nothing."
-- **The Null Chorus** (Voidborn Bard Trio): Their songs can silence or amplify. Provide void-magic buffs.
+### One complete Ebb
 
-**Side Quests:**
-- **Nihil's Truth:** Help High Priest Nihil understand the true nature of the void (or reinforce his beliefs).
-- **Echo's Nothing:** Help Echo gather void essence for his potions.
-- **The Void Titan:** Confront the corrupted Titanborn in the Null Sanctum.
+The player begins beside the Warm Nail's stove. They choose a Bone mallet, a Water current spell, and one tonic, then hear a short reaction from the village's rope-maker. The departure screen states route, seed, carried kit, tide duration, and the cost of being caught. A practice dummy and a painted dodge lane are available without spending an expedition.
 
----
+The slice tide clock begins only after the first descent loading finishes. During minutes zero to three, a single Drowned Rattle teaches a marked sweep. Two subsequent rooms add a lunging Nailrunner and a retreat lane. Clearing each chamber grants a small material bundle or a choice of temporary tuning. The map reveals a side crypt with better loot and a longer path. The player can read that cost before committing.
 
-# PART FOUR: THE TWELVE PLAYABLE RACES
+Minutes three to six introduce a Dragwright that tries to pull the player toward a slow hazard. The player sidesteps its locked hook line, strikes during recovery, and takes a relic that improves Crush stagger but lengthens attack recovery. A treasure room gives three choices and a salvage fallback; the game never forces a useless item into the pack. At the first stair landing, a rope lift offers safe extraction. Choosing it is a completed run with banked materials, not a failed boss attempt.
 
-## 1. Human (Adaptable)
-**Homeland:** Scattered across all regions
-**Racial Ability:** *Adaptive Spirit* — +10% to all stats when grouped with at least three different races
-**Lore:** Humans are the most numerous race, having spread across Vaelmora after the Sundering. They are adaptable, ambitious, and divided into numerous cultures. Some serve the Shardkeepers, others the Null Covenant. Humans have no unified kingdom—only city-states and alliances.
+Minutes six to ten bring the lower ossuary and its plate bearer. A bell chamber reveals the missing name-cylinder locked in the Sexton’s mechanism and a sign of deliberate tampering. Inspecting it marks the objective; defeating the boss releases it for extraction. At ten minutes the tide enters its warning phase: a low distant bell, a patterned HUD change, and shallow water in decorative gutters. Collision routes remain unchanged. A pre-boss shelter allows inspection without an ambush, but time continues unless the solo player explicitly pauses.
 
-## 2. Sylvan (Graceful)
-**Homeland:** Verdant Reach
-**Racial Ability:** *Nature's Step* — Move 20% faster through natural terrain and leave no tracks
-**Lore:** The Sylvan are the oldest mortal race, created by the Titanborn as stewards of nature. They are tall, slender, and long-lived (up to 500 years). After the Sundering, they retreated into Verdant Reach, mourning the loss of their creators. They are divided between those who seek to heal the world and those who wish to let it die.
+Minutes ten to thirteen contain the first boss, the Sexton of Silt. It sweeps a wide arc, marks a straight charge, and later seals one side of the arena with a slow rising-water hazard. The player chooses whether to spend the tonic or preserve it, then wins by using the boss's long recovery. Boss victory stops arena hazards, not the sea. A nearby emergency stair opens, with a clearly stated 45-second traversal allowance. The player takes the cylinder and climbs out with enough time to spare.
 
-## 3. Forgeborn (Stalwart)
-**Homeland:** Emberfall
-**Racial Ability:** *Forge Resilience* — 10% damage reduction and immunity to fire damage
-**Lore:** The Forgeborn are beings of stone and flame, created by the Titanborn to build their palaces and weapons. After the Sundering, they forged their own civilization in Emberfall. They value craftsmanship, honor, and tradition. Their bodies are covered in runic tattoos that record their life achievements.
+Back home, the material bag and objective settle once. The recovered cylinder restores the first small bell's name sequence. A smith arrives to inspect its fitting, and the tavern gains a dry corner for a new resident. A faction leader asks whether the bell should be rung publicly. The player can talk, craft, or stop; there is no login-energy gate pushing another run.
 
-## 4. Drakkin (Proud)
-**Homeland:** Emberfall
-**Racial Ability:** *Dragon's Breath* — Breathe fire in a cone, dealing damage over time
-**Lore:** The Drakkin are descended from dragons who served the Titanborn. They are proud, honor-bound, and quick to anger. Their society is organized into clans, each led by a Dragonlord. They believe that one day, the dragons will return to reclaim Vaelmora—and they intend to be ready.
-
-## 5. Meridian (Fluid)
-**Homeland:** Tidal Sovereign
-**Racial Ability:** *Tidal Affinity* — Breathe underwater and swim 50% faster
-**Lore:** The Meridian are merfolk who have adapted to life in the Aetheric Sea. They are curious, playful, and fiercely protective of their ocean home. Their cities are built on the backs of colossal turtles and in the depths of coral reefs. They trade with surface dwellers but trust no one fully.
-
-## 6. Tidecaller (Wandering)
-**Homeland:** Tidal Sovereign
-**Racial Ability:** *Sea Legs* — Immune to seasickness and gain bonuses on ships
-**Lore:** The Tidecallers are humans and elves who have embraced a nomadic life on the sea. They are pirates, merchants, and explorers who answer to no king. Their culture is based on freedom, loyalty to crew, and the belief that the horizon is the only true home.
-
-## 7. Frostborn (Enduring)
-**Homeland:** Frostveil
-**Racial Ability:** *Frost Aura* — Emit a chilling aura that slows nearby enemies
-**Lore:** The Frostborn are beings of ice and snow, created by the Titanborn to guard the frozen north. They are patient, stoic, and slow to trust. Their bodies are covered in frost-runes that glow when they use magic. They believe that the Titanborn are not dead—only sleeping—and they wait for their creators to return.
-
-## 8. Northman (Hardy)
-**Homeland:** Frostveil
-**Racial Ability:** *Winter's Endurance* — +20% cold resistance and +10% stamina regeneration
-**Lore:** The Northmen are humans who have adapted to the harsh climate of Frostveil. They are tough, practical, and superstitious. Their society is organized into clans, each led by a Jarl. They believe that the Sundering was a punishment from the gods—and that they must prove themselves worthy of survival.
-
-## 9. Deepborn (Inventive)
-**Homeland:** Stoneheart
-**Racial Ability:** *Tunnel Vision* — See perfectly in darkness and detect nearby ore deposits
-**Lore:** The Deepborn are gnome-like beings who have lived underground for millennia. They are curious, inventive, and obsessed with crystals. Their cities are wonders of engineering, built around glowing crystal formations. They believe that the Stoneheart Shard is the key to understanding the Sundering—and they will stop at nothing to study it.
-
-## 10. Stonewarden (Ancient)
-**Homeland:** Stoneheart
-**Racial Ability:** *Golem's Endurance* — Immune to knockback and gain 15% armor
-**Lore:** The Stonewardens are golems created by the Titanborn to guard their underground vaults. After the Sundering, many went dormant. Those that remain awake have developed sentience—and with it, existential questions. They are slow, deliberate, and surprisingly philosophical.
-
-## 11. Aetherborn (Free)
-**Homeland:** Skyreach
-**Racial Ability:** *Wings of Aether* — Glide and double-jump
-**Lore:** The Aetherborn are winged humanoids who have lived in the skies since the Sundering. They are free-spirited, curious, and fiercely independent. Their cities are built on floating islands, and they navigate the winds with ease. They believe that the sky is the only true home—and that the ground is for lesser beings.
-
-## 12. Shadeborn (Mysterious)
-**Homeland:** Umbral Depths
-**Racial Ability:** *Shadow Step* — Teleport short distances through shadows
-**Lore:** The Shadeborn are beings of shadow, created by the Titanborn to serve as spies and assassins. After the Sundering, they retreated into the darkness and developed their own society. They are secretive, pragmatic, and feared by other races. They believe that the light is a lie—and that true power lies in the shadows.
-
----
-
-# PART FIVE: THE MAIN STORY
-
-## Act One: The Calling
-
-The player awakens in **Wayfarer's Rest**, a neutral sanctuary maintained by the **Keepers of the Weave**. They have no memory of their previous life—only a vague sense of purpose and a glowing mark on their hand (the **Wayfarer's Sigil**). The Keepers explain that the player has been Called by one of the Twelve Shards—but which one, and why, is unknown.
-
-**Key Quests:**
-1. **Awakening** — Tutorial quest. Learn basic controls, combat, and crafting.
-2. **The Keeper's Test** — Prove your worth by completing challenges in each of the starting zones.
-3. **The First Shard** — Travel to one of the Twelve Shards and investigate the disturbance. Discover that the Shard is being corrupted by a mysterious force.
-
-**Climax of Act One:** The player confronts a **Null Covenant agent** who is attempting to damage the Shard. The agent is defeated, but not before revealing that the Null Covenant has already corrupted three other Shards.
-
-## Act Two: The Fracturing
-
-The player is now a recognized **Wayfarer**, granted access to all regions. The Keepers send them to investigate the corrupted Shards and uncover the Null Covenant's plans.
-
-**Key Quests:**
-1. **The Corrupted Shards** — Travel to three corrupted Shards (one each in Verdant Reach, Frostveil, and Mirefen). Cleanse them with the help of local NPCs.
-2. **The Null Covenant** — Infiltrate the Null Covenant and discover their true goal: to destroy all Twelve Shards and free the Titanborn.
-3. **The Titanborn's Dream** — Enter the Dreamweave and communicate with a sleeping Titanborn. Learn the truth: the Titanborn are not dead—they are imprisoned within the Shards, and their awakening would destroy all mortal life.
-
-**Climax of Act Two:** The player confronts **High Priest Nihil** in Void's Edge. Nihil reveals that he knows the Titanborn would destroy the world—but he believes that destruction is preferable to imprisonment. He damages the Voidstone Shard, causing a catastrophic rift in the Weave. The player must choose: kill Nihil and attempt to repair the Shard, or spare him and try to reason with him.
-
-## Act Three: The Reckoning
-
-The rift in the Weave is spreading. The Shards are destabilizing. The player must unite the Twelve Regions to prevent the world from unraveling.
-
-**Key Quests:**
-1. **The Alliance** — Travel to each region and convince its leaders to join a coalition to save Vaelmora.
-2. **The Shardkeepers' Secret** — Discover that the Shardkeepers have known about the Titanborn's imprisonment all along—and that they have been secretly working to keep the Titanborn asleep.
-3. **The Titanborn's Bargain** — Enter the Dreamweave one final time. The Titanborn offer the player a choice: free them, and they will spare the world; or keep them imprisoned, and the Weave will eventually collapse anyway.
-
-**Climax of Act Three:** The player must choose:
-- **Free the Titanborn** — The Titanborn are released, but they immediately begin reshaping the world. The player must fight them in an epic endgame raid.
-- **Keep the Titanborn Imprisoned** — The player sacrifices their Wayfarer's Sigil to repair the Weave, becoming mortal again. The world is saved, but the Titanborn's dreams continue to leak into reality, creating new threats.
-- **Destroy the Shards** — The player sides with the Null Covenant and destroys the Shards. The Titanborn die, but the Weave collapses. The world survives, but magic is gone forever. A bittersweet ending.
-
----
-
-# PART SIX: GAMEPLAY SYSTEMS
-
-## Combat
-- **Real-time action combat** with dodge rolls, parries, and combos.
-- **Weapon types:** swords, axes, spears, bows, staves, daggers, hammers, and unique weapons per race.
-- **Magic schools:** Fire, Ice, Lightning, Nature, Shadow, Light, Time, Dream, Void.
-- **Class system:** No rigid classes. Players mix and match abilities from **Skill Trees** based on their race and weapon choices.
-- **Combo System:** Chain different weapon attacks and spells for bonus damage.
-- **Parry System:** Time your blocks to stagger enemies and open counterattacks.
-- **Elemental Affinities:** Each region's magic has strengths and weaknesses against others.
-
-## Crafting
-- **Gathering:** Mining, herbalism, fishing, logging, scavenging.
-- **Crafting:** Blacksmithing, alchemy, enchanting, cooking, tailoring, engineering.
-- **Cooking:** Recipes found in the world. Food provides temporary buffs.
-- **Housing:** Players can build homes in any region, with region-specific architecture.
-- **Crafting Guilds:** Join specialized guilds for exclusive recipes and bonuses.
-
-## Social Systems
-- **Guilds:** Player-run organizations with guild halls, banks, and perks.
-- **Factions:** Reputation with each region's ruling council. Earn exclusive gear and quests.
-- **Marriage:** In-game marriage system with shared housing and bonuses.
-- **Mentorship:** High-level players can mentor low-level players for rewards.
-- **Player Housing:** Customize your home with furniture, trophies, and crafting stations.
-
-## PvP
-- **Open-world PvP** in designated zones (Ashfall Wastes, Corsair's Cove, The Turbulence, etc.).
-- **Battlegrounds:** 10v10 and 20v20 objective-based PvP.
-- **Arena:** 1v1 and 3v3 ranked PvP.
-- **Faction Warfare:** Large-scale PvP between regions.
-- **Dueling:** Challenge other players anywhere outside safe zones.
-
-## Endgame
-- **Raids:** 20-player raids against Titanborn Echoes.
-- **Dungeons:** 5-player dungeons in each region.
-- **World Bosses:** Massive creatures that require 40+ players to defeat.
-- **Wayfarer Trials:** Solo challenges for exclusive rewards.
-- **Fishing Tournaments:** Weekly competitions with rare rewards.
-- **Treasure Hunting:** Follow treasure maps to hidden caches.
-- **Pet Battles:** Collect and battle pets in turn-based minigames.
-
-## Exploration
-- **Hidden Treasures:** Buried treasure maps, hidden chests, and secret areas.
-- **Lore Books:** Collectible books that expand the game's lore.
-- **Photography Mode:** Capture screenshots and share them in-game.
-- **Mounts:** Region-specific mounts (horses, wolves, turtles, airships, etc.).
-- **Pet System:** Tameable pets with unique abilities.
-- **Fishing:** Catch rare fish in each region's waters.
-- **Archaeology:** Dig up ancient artifacts and learn their stories.
-
-## Economy
-- **Player-Driven Economy:** Auction houses in major cities.
-- **Currency:** Gold coins, with regional currencies for special vendors.
-- **Trading:** Direct player-to-player trading.
-- **Bank System:** Shared bank across characters on the same account.
-- **Mail System:** Send items and gold to other players.
-
-## Difficulty and Accessibility
-- **Difficulty Settings:** Story, Normal, Hard, and Nightmare modes.
-- **Accessibility Options:** Colorblind modes, text-to-speech, controller support, and adjustable UI.
-- **Solo-Friendly:** All content can be completed solo (except raids and some dungeons).
-- **Group Finder:** Automated matchmaking for dungeons and raids.
-
----
-
-# PART SEVEN: VISUAL AND AUDIO DESIGN
-
-## Art Style
-- **2D top-down pixel art** with a painterly aesthetic.
-- **Inspired by:** Octopath Traveler, CrossCode, and classic SNES RPGs.
-- **Color palette:** Vibrant, with each region having a distinct color scheme.
-- **Animations:** Smooth, fluid, with unique animations for each race and weapon.
-- **Weather Effects:** Dynamic weather that affects gameplay (blizzards in Frostveil, ashfall in Emberfall, etc.).
-
-## Music
-- **Orchestral soundtrack** with regional variations.
-- **Dynamic music** that changes based on combat, exploration, and story moments.
-- **Each region has its own leitmotif** that weaves into the main theme.
-- **Bard NPCs** play actual music that players can listen to.
-
-## Sound Design
-- **Ambient sounds** for each region (birdsong, wind, lava bubbling, etc.).
-- **Unique sound effects** for each race's abilities.
-- **Voice acting** for main story NPCs (with text for all dialogue).
-- **Musical Instruments:** Players can learn to play instruments and perform for other players.
-
----
-
-# PART EIGHT: THE WORLD MAP
-
-The world map is a massive floating archipelago, with each region drifting in the Aetheric Sea. Travel between regions is accomplished via:
-- **Aether Bridges** (walkable paths)
-- **Waygates** (fast travel for Wayfarers)
-- **Airship Routes** (scheduled flights)
-- **Drift-Sailing** (endgame player-controlled travel)
-
----
-
-# PART NINE: KEY CHARACTERS
-
-## The Keepers of the Weave
-- **Archivist Morrow** — The ancient keeper of Wayfarer's Rest. A mysterious figure who has guided Wayfarers for centuries. "You are not the first. You will not be the last. But you may be the most important."
-- **Sentinel Kael** — A Wayfarer who has been in Vaelmora for over a century. Serves as a mentor to new players. "I've seen empires rise and fall. I've seen the Shards flicker and fade. And I've seen hope in the strangest places."
-
-## The Null Covenant
-- **High Priest Nihil** — The charismatic leader of the Null Covenant. Believes that destroying the Shards will free the world. "The Titanborn are not gods. They are jailers. And we are the prisoners."
-- **The Veiled One** — Nihil's mysterious second-in-command. Nobody knows their true identity—or their true motives. "The void sees all. The void knows all. The void... says nothing."
-
-## The Shardkeepers
-- **Elder Marenth** — A Sylvan druid who has guarded the Verdant Heart for centuries. "The forest remembers. The forest waits. The forest... is running out of patience."
-- **High Forgemaster Durn** — A Forgeborn who has dedicated his life to studying the Ember Core. "Fire is life. Fire is death. Fire is... complicated."
-- **Admiral Vex** — A Tidecaller pirate queen who secretly serves as a Shardkeeper agent. "The sea keeps secrets. So do I."
-
-## The Titanborn
-- **Vaelthar (Life)** — Dreaming in the Verdant Heart. Its dreams create new species. "Grow. Change. Become."
-- **Ignar (Fire)** — Nightmares fuel Emberfall's volcanoes. "Burn. Consume. Rebirth."
-- **Nerith (Water)** — Trapped in the Tidal Pearl. "Remember. Forget. Remember."
-- **Frosta (Ice)** — Frozen in the Heart of Winter. "Preserve. Protect. Endure."
-- **Terran (Earth)** — Slumbering in the World Pillar. "Build. Stand. Fall."
-- **Zephyr (Air)** — Drifting in the Skyheart. "Fly. Wander. Return."
-- **Umbra (Shadow)** — Whispering in the Shadowstone. "Hide. Seek. Reveal."
-- **Lumina (Light)** — Bound to the Dawnstone. "Shine. Blind. Guide."
-- **Decaya (Decay)** — Rooted in the Rotheart. "Rot. Rebirth. Repeat."
-- **Chronos (Time)** — Locked in the Timepiece. "Wait. Watch. Change."
-- **Morphea (Dreams)** — Wandering the Dreamstone. "Sleep. Dream. Wake."
-- **Null (Void)** — Corrupted, seeking to unmake reality. "Nothing. Everything. Nothing."
-
----
-
-# PART TEN: EXPANSION PACKS
-
-## Expansion 1: The Awakening
-- **New Region:** The Shattered Moon—a fragment of Vaelmora's original moon that crashed into the Aetheric Sea.
-- **New Race:** Moonborn—beings of lunar energy.
-- **New Story:** The Titanborn begin to stir. The player must prevent the first Titanborn from fully awakening.
-- **New Features:** Lunar magic, moon-phase mechanics, and new dungeons.
-
-## Expansion 2: The Deep Below
-- **New Region:** The Abyssal Trench—an underwater realm beneath Tidal Sovereign.
-- **New Race:** Abyssal—deep-sea horrors who have developed sentience.
-- **New Story:** An ancient evil stirs in the depths—the first Titanborn, the one who created the Shards.
-- **New Features:** Underwater combat, pressure mechanics, and new raid content.
-
-## Expansion 3: The Weave Unraveled
-- **New Region:** The Void Between—the space between islands in the Aetheric Sea.
-- **New Race:** Weaveborn—beings made of pure magical energy.
-- **New Story:** The Weave begins to collapse. The player must make the ultimate choice: save the world, or save the Titanborn.
-- **New Features:** Reality-bending puzzles, new endgame content, and a final raid.
-
----
-
-# PART ELEVEN: TECHNICAL DETAILS
-
-## Game Engine
-- **Engine:** Unity or Godot (for 2D top-down games).
-- **Networking:** Client-server architecture with dedicated servers.
-- **Server Locations:** North America, Europe, Asia, and Oceania.
-- **Cross-Platform:** PC first, with potential console ports.
-
-## Player Count
-- **Server Capacity:** 5,000-10,000 players per server.
-- **Instance System:** Dungeons and raids are instanced.
-- **Open World:** Seamless open world with region-based loading.
-
-## Monetization
-- **Buy-to-Play:** Base game purchase with optional cosmetic microtransactions.
-- **No Pay-to-Win:** All gameplay content is accessible without spending extra money.
-- **Cosmetics:** Skins, mounts, and housing items available for purchase.
-- **Expansion Packs:** Paid expansions with new content.
-
-## Community Features
-- **In-Game Forums:** Discuss strategies and share stories.
-- **Guild Tools:** Calendar, chat, and recruitment tools.
-- **Streaming Integration:** Built-in streaming support.
-- **Modding Support:** Official modding tools for custom content.
-
----
-
-# PART TWELVE: CONCLUSION
-
-**Vaelmora: The Shardbound Saga** is a massive 2D top-down MMORPG that combines classic action-adventure gameplay with deep lore, diverse races, and a world that feels alive. The story explores themes of imprisonment, freedom, and the cost of power—all wrapped in a vibrant, explorable world.
-
-The Twelve Regions each offer unique experiences, from the volcanic forges of Emberfall to the dreamscapes of Dreamweave. The Twelve Races each have their own cultures, abilities, and stories. And the main storyline offers players meaningful choices that shape the fate of the world.
-
-With its engaging combat, deep crafting, rich social systems, and expansive endgame, Vaelmora offers hundreds of hours of adventure for players who love to explore, fight, craft, and discover.
-
-# VAELMORA: THE SHARDBOUND SAGA
-## Supplementary Ideas & Additional Systems
-
----
-
-# ADDITIONAL SYSTEMS & FEATURES
-
-## 1. THE WAYFARER'S PATH (Alternate Progression)
-
-Beyond combat and crafting, players can progress through **The Wayfarer's Path**—a meta-progression system that tracks their connection to the Weave.
-
-### Path Ranks
-| Rank | Title | Unlocks |
-|------|-------|---------|
-| 1 | Wanderer | Basic Waygate travel |
-| 2 | Seeker | Drift-sailing, one extra bag slot |
-| 3 | Pilgrim | Access to hidden lore vaults |
-| 4 | Trailblazer | Faster travel, rare gathering nodes |
-| 5 | Pathfinder | Personal Waygate, mount speed boost |
-| 6 | Wayfarer | Full Weave attunement, cosmetic aura |
-| 7 | Shardbound | Endgame trials, legendary quest access |
-
-### Path Points
-Earned through:
-- Discovering new locations
-- Completing regional storylines
-- Gathering rare materials
-- Helping other players
-- Participating in world events
-
----
-
-## 2. THE LIVING WORLD (Dynamic Events)
-
-Vaelmora is not static. The world reacts to player actions and the passage of time.
-
-### World Events
-- **Aether Storms:** Random magical storms that buff or debuff players in a region. Rare materials spawn during storms.
-- **Titanborn Dreams:** When a Titanborn stirs in its sleep, its region experiences surreal changes (floating rocks, reversed gravity, time loops).
-- **Null Covenant Raids:** The Null Covenant periodically attacks towns. Players must defend NPCs and buildings.
-- **Regional Festivals:** Each region celebrates unique holidays with special quests, vendors, and cosmetics.
-
-### Dynamic NPC Behavior
-- NPCs have daily schedules (sleep, work, socialize).
-- NPCs remember player actions and react accordingly.
-- NPCs can be killed and will respawn after a period (or be permanently replaced if the player fails a defense event).
-- NPCs form relationships with each other and with players.
-
-### Ecology System
-- Predator/prey relationships between creatures.
-- Overhunting a species causes it to become rare, affecting the ecosystem.
-- Conservation quests to restore balance.
-- Rare creatures spawn only under specific conditions (weather, time, player actions).
-
----
-
-## 3. PLAYER-DRIVEN STORYTELLING
-
-### The Chronicle System
-Players can record their adventures in an in-game journal. Completed journals can be shared with other players as "Chronicles"—mini-stories that others can read.
-
-### Player Events
-- Players can host their own events (tavern nights, tournaments, roleplay gatherings).
-- Event creation tools: set location, time, activities, and rewards.
-- Featured events appear on the in-game calendar.
-
-### Reputation System
-- Each player has a reputation score visible to others.
-- Reputation earned through helpful behavior, fair trading, and community participation.
-- Negative reputation for scamming, griefing, or toxic behavior.
-- High-reputation players unlock special titles, mounts, and vendors.
-
----
-
-## 4. ADVANCED COMBAT SYSTEMS
-
-### Weapon Arts
-Each weapon type has unique **Weapon Arts**—special abilities unlocked through use.
-
-| Weapon | Art | Effect |
-|--------|-----|--------|
-| Sword | Blade Dance | Rapid multi-hit combo |
-| Axe | Cleaving Strike | Wide arc attack that hits multiple enemies |
-| Spear | Impaling Thrust | Long-range piercing attack |
-| Bow | Rain of Arrows | AoE arrow barrage |
-| Staff | Arcane Nova | Explosive magical burst |
-| Dagger | Shadow Strike | Teleport behind enemy and backstab |
-| Hammer | Earthshatter | Ground slam that knocks enemies down |
-
-### Elemental Synergies
-Combine elements for powerful reactions:
-- **Fire + Ice** = Steam Cloud (obscures vision, damages over time)
-- **Lightning + Water** = Electrified Field (stuns enemies)
-- **Nature + Decay** = Entangling Roots (immobilizes enemies)
-- **Light + Shadow** = Eclipse (blinds enemies, boosts dark magic)
-- **Time + Dream** = Temporal Loop (enemies repeat their last action)
-- **Void + Any** = Nullification (cancels enemy abilities)
-
-### Boss Mechanics
-- **Phase Transitions:** Bosses change behavior at health thresholds.
-- **Environmental Hazards:** Arenas have interactive elements (lava pits, crumbling bridges, healing springs).
-- **Add Phases:** Bosses summon minions that must be handled.
-- **Enrage Timers:** Bosses become more dangerous over time.
-- **Weak Points:** Specific body parts can be targeted for bonus damage.
-
----
-
-## 5. COMPANION SYSTEM
-
-Players can recruit **Companions**—NPCs who accompany them on adventures.
-
-### Companion Types
-| Type | Role | Example |
-|------|------|---------|
-| Warrior | Tank/DPS | A Drakkin mercenary |
-| Mage | Ranged DPS | A Sylvan elementalist |
-| Healer | Support | A Luminari cleric |
-| Rogue | Utility/Stealth | A Shadeborn scout |
-| Beast | Pet/Tank | A tamed wolf or bear |
-
-### Companion Mechanics
-- Companions level up with the player.
-- Each companion has a personal questline.
-- Companions can be equipped with gear.
-- Companions have affinity levels—higher affinity unlocks new abilities and dialogue.
-- Companions can be romanced (optional).
-- Companions can die permanently in Hardcore mode.
-
-### Companion Gallery
-- **Kaelen** (Human Warrior): A disgraced knight seeking redemption.
-- **Sylvara** (Sylvan Mage): A young druid exploring the world for the first time.
-- **Torvin** (Forgeborn Healer): A gentle giant who hates violence but will protect his friends.
-- **Nyx** (Shadeborn Rogue): A former assassin trying to leave her past behind.
-- **Ember** (Drakkin Warrior): A hot-headed duelist who loves a challenge.
-- **Finn** (Meridian Bard): A cheerful storyteller who supports through song.
-- **Boulder** (Stonewarden Tank): A philosophical golem learning about life.
-- **Wisp** (Dreamborn Mage): A mischievous dream-creature with unpredictable magic.
-
----
-
-## 6. HOUSING & GUILD HALLS
-
-### Player Housing
-- **Locations:** Players can buy houses in any region's capital city.
-- **Customization:** Furniture, decorations, wallpaper, flooring, and outdoor areas.
-- **Functionality:** Storage chests, crafting stations, garden plots, pet beds.
-- **Social:** Players can invite friends to their homes. Some houses can be set as "public" for visitors.
-- **Prestige:** Rare furniture and trophies display achievements.
-
-### Guild Halls
-- **Guild Hall Types:** Small (10 members), Medium (50 members), Large (200 members).
-- **Facilities:** Guild bank, crafting stations, training dummies, portal room, trophy hall.
-- **Customization:** Guilds can decorate their halls with banners, statues, and trophies.
-- **Guild Events:** Guild halls can host private events and competitions.
-- **Guild Wars:** Guilds can declare war on each other for territory and resources.
-
----
-
-## 7. SEASONS & BATTLE PASSES
-
-### Seasonal Content
-Vaelmora has four seasons, each with unique content:
-
-| Season | Theme | Activities |
-|--------|-------|------------|
-| Spring | Renewal | Planting events, nature quests, baby animal pets |
-| Summer | Celebration | Festivals, tournaments, beach events |
-| Autumn | Harvest | Cooking competitions, harvest quests, scarecrow cosmetic |
-| Winter | Reflection | Snowball fights, gift exchanges, ice skating |
-
-### Battle Pass
-- **Free Track:** Earn cosmetics, currency, and consumables.
-- **Premium Track:** Exclusive mounts, outfits, and emotes.
-- **Seasonal Story:** Each season advances a side-story unrelated to the main plot.
-- **Challenges:** Daily, weekly, and seasonal challenges with rewards.
-
----
-
-## 8. CRAFTING PROFESSIONS (Expanded)
-
-### Primary Professions
-| Profession | Description | Key Items |
-|------------|-------------|-----------|
-| Blacksmithing | Forge weapons and heavy armor | Swords, axes, plate armor |
-| Alchemy | Brew potions and elixirs | Healing potions, buffs, poisons |
-| Enchanting | Imbue gear with magical properties | Enchanted weapons, armor |
-| Tailoring | Craft cloth armor and bags | Robes, cloaks, bags |
-| Engineering | Build gadgets and explosives | Bombs, turrets, mechanical pets |
-| Cooking | Prepare food with buffs | Stat food, feasts |
-| Jewelcrafting | Cut gems and craft jewelry | Rings, amulets, gem sockets |
-| Leatherworking | Craft leather armor and mounts | Light armor, saddles |
-| Woodworking | Craft bows, staves, and furniture | Bows, staves, housing items |
-
-### Secondary Professions
-- **Fishing:** Catch fish for cooking and rare treasures.
-- **Archaeology:** Dig up artifacts and learn lore.
-- **Gathering:** Mining, herbalism, logging, skinning.
-- **Salvaging:** Break down gear into crafting materials.
-- **Runecrafting:** Inscribe runes onto gear for bonus effects.
-
-### Mastery System
-- Each profession has a mastery track.
-- Mastering a profession unlocks exclusive recipes and bonuses.
-- Master crafters can create legendary items.
-
----
-
-## 9. PET SYSTEM (Expanded)
-
-### Pet Types
-| Type | Source | Abilities |
-|------|--------|-----------|
-| Combat Pets | Tamed in the wild | Fight alongside player |
-| Cosmetic Pets | Quests, vendors, achievements | Follow player, no combat |
-| Utility Pets | Crafting, gathering | Provide bonuses |
-| Mount Pets | Rare drops | Can be used as mounts |
-
-### Pet Battles
-- Turn-based pet combat system.
-- Collect pets from across Vaelmora.
-- Level up pets and teach them new abilities.
-- Battle other players' pets in arenas.
-- Pet tournaments with rare rewards.
-
-### Pet Breeding
-- Breed two pets to create offspring with inherited traits.
-- Rare traits can be passed down.
-- Breeding requires time and resources.
-- Some pets can only be obtained through breeding.
-
----
-
-## 10. FACTION SYSTEMS (Expanded)
-
-### Major Factions
-| Faction | Ideology | Rewards |
-|---------|----------|---------|
-| Shardkeepers | Preserve the Weave | Shardkeeper gear, lore access |
-| Null Covenant | Destroy the Shards | Void gear, forbidden knowledge |
-| Skyfarer's Guild | Free trade and travel | Airship cosmetics, trade bonuses |
-| Circle of Roots | Protect nature | Druidic gear, nature mounts |
-| Council of Flames | Honor and craftsmanship | Forge gear, crafting bonuses |
-| Tide Council | Freedom and profit | Pirate gear, smuggling quests |
-| Frost Council | Endure and remember | Frost gear, memory access |
-| Gem Council | Wealth and discovery | Crystal gear, mining bonuses |
-| Shadow Conclave | Knowledge and power | Shadow gear, stealth bonuses |
-| Dawnsworn | Light and justice | Holy gear, healing bonuses |
-| Rot Council | Balance of life and death | Decay gear, necromancy |
-| Temporal Council | Order in chaos | Time gear, chronomancy |
-| Dream Council | Understanding dreams | Dream gear, illusion magic |
-
-### Faction Reputation
-- Earn reputation through quests, dailies, and turn-ins.
-- Reputation levels: Neutral, Friendly, Honored, Revered, Exalted.
-- Each level unlocks new rewards.
-- Some factions are hostile to each other—gaining reputation with one may reduce it with another.
-
----
-
-## 11. PVP SYSTEMS (Expanded)
-
-### PvP Modes
-| Mode | Description | Rewards |
-|------|-------------|---------|
-| Open World | Flag for PvP anywhere in contested zones | Honor points, gear |
-| Battlegrounds | 10v10 objective-based matches | Honor, marks of valor |
-| Arenas | 1v1, 3v3 ranked combat | Arena points, titles |
-| Faction Warfare | Large-scale region battles | Territory control, bonuses |
-| Duels | 1v1 challenge anywhere | Cosmetic rewards |
-| Hardcore Mode | Permanent death PvP | Exclusive titles, mounts |
-
-### Honor System
-- Earn Honor through PvP kills and objectives.
-- Honor ranks unlock PvP gear and cosmetics.
-- Seasonal rewards for top-ranked players.
-- Dishonorable kills (killing low-level players) reduce Honor.
-
-### PvP Zones
-- **Ashfall Wastes:** Open PvP with rich resources.
-- **Corsair's Cove:** Pirate haven with smuggling quests.
-- **The Turbulence:** Aerial PvP with wind mechanics.
-- **The Howling Pass:** Mountain PvP with blizzard effects.
-- **The Echoing Deeps:** Cave PvP with sound-based mechanics.
-- **The Penumbra:** Light/shadow PvP with shifting terrain.
-- **The Fractured Hour:** Time-loop PvP with temporal mechanics.
-- **The Lucid Sea:** Dream PvP with illusion mechanics.
-- **The Event Horizon:** Void PvP with deletion mechanics.
-
----
-
-## 12. ACHIEVEMENTS & COLLECTIONS
-
-### Achievement Categories
-- **Exploration:** Discover every location.
-- **Combat:** Defeat bosses, win PvP matches.
-- **Crafting:** Master professions, craft rare items.
-- **Social:** Make friends, join guilds, host events.
-- **Collection:** Collect mounts, pets, toys, transmogs.
-- **Story:** Complete main storylines and side quests.
-- **Challenge:** Complete hard modes, speedruns, solo content.
-
-### Collection Systems
-- **Mount Collection:** Over 100 mounts to collect.
-- **Pet Collection:** Over 200 pets to collect.
-- **Toy Collection:** Fun items with unique effects.
-- **Transmog Collection:** Cosmetic appearances for gear.
-- **Recipe Collection:** Crafting recipes to discover.
-- **Lore Collection:** Books, scrolls, and artifacts.
-- **Achievement Points:** Earn points for completing achievements. Spend on rewards.
-
----
-
-## 13. SOCIAL FEATURES (Expanded)
-
-### Communication
-- **Chat Channels:** General, trade, guild, party, whisper.
-- **Voice Chat:** Optional in-game voice chat.
-- **Emotes:** Over 100 emotes for roleplay.
-- **Mail System:** Send messages and items to other players.
-- **Friend List:** Track friends and see their status.
-- **Ignore List:** Block players you don't want to hear from.
-
-### Grouping
-- **Party:** Up to 5 players.
-- **Raid:** Up to 20 players.
-- **Group Finder:** Automated matchmaking for dungeons and raids.
-- **Looking for Group:** Manual group formation.
-- **Mentorship:** High-level players mentor low-level players.
-
-### Guild Features
-- **Guild Bank:** Shared storage for guild members.
-- **Guild Calendar:** Schedule events and raids.
-- **Guild Ranks:** Customizable ranks and permissions.
-- **Guild Achievements:** Earn achievements as a guild.
-- **Guild Perks:** Unlock bonuses through guild progression.
-
----
-
-## 14. THE LORE BEYOND (Endgame Content)
-
-### Titanborn Raids
-- **Vaelthar's Dream:** 20-player raid in Verdant Reach.
-- **Ignar's Nightmare:** 20-player raid in Emberfall.
-- **Nerith's Memory:** 20-player raid in Tidal Sovereign.
-- **Frosta's Vigil:** 20-player raid in Frostveil.
-- **Terran's Foundation:** 20-player raid in Stoneheart.
-- **Zephyr's Flight:** 20-player raid in Skyreach.
-- **Umbra's Secret:** 20-player raid in Umbral Depths.
-- **Lumina's Trial:** 20-player raid in Radiant Spire.
-- **Decaya's Garden:** 20-player raid in Mirefen.
-- **Chronos's Paradox:** 20-player raid in Chronos Reach.
-- **Morphea's Dream:** 20-player raid in Dreamweave.
-- **Null's Void:** 20-player raid in Void's Edge.
-
-### The Shardbound Trials
-- **Solo Challenges:** Prove your worth as a Wayfarer.
-- **Timed Runs:** Complete dungeons within time limits.
-- **No-Death Runs:** Complete content without dying.
-- **Class Challenges:** Complete content with specific restrictions.
-
-### Prestige System
-- **Prestige Levels:** Reset your character for cosmetic rewards.
-- **Prestige Rewards:** Exclusive mounts, titles, and auras.
-- **Prestige Titles:** Show off your dedication.
-
----
-
-## 15. QUALITY OF LIFE FEATURES
-
-### User Interface
-- **Customizable UI:** Move, resize, and hide UI elements.
-- **Addon Support:** Community-created addons.
-- **Keybinding:** Fully customizable controls.
-- **Colorblind Modes:** Multiple colorblind-friendly palettes.
-- **Text-to-Speech:** NPC dialogue read aloud.
-- **Controller Support:** Full controller compatibility.
-
-### Convenience
-- **Fast Travel:** Waygates, airships, and mounts.
-- **Auto-Loot:** Automatically pick up loot.
-- **Bag Sorting:** One-click inventory sorting.
-- **Crafting Queues:** Queue multiple crafts at once.
-- **Mailbox:** Send items to alts and friends.
-- **Auction House:** Buy and sell items.
-- **Transmog System:** Change gear appearance without changing stats.
-
-### Accessibility
-- **Difficulty Options:** Story, Normal, Hard, Nightmare.
-- **Solo-Friendly:** All content can be completed solo (except raids).
-- **Tutorials:** Optional tutorials for new players.
-- **Hints System:** In-game hints for puzzles and quests.
-- **Respec:** Change your build anytime for free.
-
----
-
-## 16. FUTURE CONTENT ROADMAP
-
-### Post-Launch Updates
-| Update | Content |
-|--------|---------|
-| 1.1 | New dungeon, seasonal event, bug fixes |
-| 1.2 | New region (Shattered Moon), new race (Moonborn) |
-| 1.3 | New raid, PvP season 2 |
-| 1.4 | Housing expansion, new crafting recipes |
-| 1.5 | New region (Abyssal Trench), new race (Abyssal) |
-| 1.6 | New raid, pet battle expansion |
-| 1.7 | Guild wars, territory control |
-| 1.8 | New region (Void Between), new race (Weaveborn) |
-| 1.9 | Final raid, endgame content |
-| 2.0 | Major expansion (new continent, new story) |
-
-### Community Events
-- **Design a Boss:** Community contest to design a boss.
-- **Fan Art Contest:** Winners get their art in-game.
-- **Story Contest:** Winners get their story as a quest.
-- **Cosplay Contest:** Winners get exclusive cosmetics.
-
----
-
-# CONCLUSION
-
-**Vaelmora: The Shardbound Saga** is a living, breathing world that offers players endless opportunities for adventure, community, and creativity. With its deep lore, diverse races, engaging combat, and expansive endgame, Vaelmora is designed to be a home for players for years to come.
-
-The additional systems outlined here—companions, housing, seasons, pet battles, faction reputation, and more—ensure that every type of player can find their place in Vaelmora. Whether you're a solo explorer, a hardcore raider, a dedicated crafter, or a social butterfly, Vaelmora has something for you.
-
-**The Shards await, Wayfarer. Your story begins now.**
+The two alternate endings are equally concrete. Death closes combat immediately, records the cause, loses the unbanked pack, and returns the Bellringer at dawn. If the sea reaches the final deadline first, a short tide-taken sequence produces the same loss boundary with distinct dialogue and a different journal record. Safe extraction, death, and tide capture remain different outcomes in statistics and story, even though all return the player home.
+
+## 3. Combat: salt, iron, and commitment
+
+### Shared rules
+
+Simulation advances at 60 fixed ticks per second in logical pixels. Tiles are 16 units. Player movement begins at 80 units per second with normalized diagonals and an 8-by-6-unit feet collider. Sprite size, hurtbox, and weapon shape are separate. Aim is continuous for simulation; Down, Side, and Up animation directions approximate it visually, with mirrored Side art and separately authored weapon offsets.
+
+A player starts with 100 health, 100 resonance, two weapon slots, one current spell, one consumable slot, and six relic sockets. There is no stamina meter initially: attack recovery and dodge cooldown provide commitments. A six-tick input buffer accepts one queued action near recovery end. Holding attack can repeat at the legal rate when the accessibility option is enabled; it cannot bypass recovery. One attack ID may hit the same target once unless a spell explicitly declares periodic damage.
+
+Dodge lasts 18 ticks and moves at 160 units per second. Invulnerability applies on ticks 3–12 inclusive. Cooldown is 48 ticks from activation. Walls stop travel; closed doors and tide boundaries cannot be phased through. Damage grants 36 ticks of hurt immunity, displayed by a restrained outline. The longer of existing immunity and a new immunity window applies; durations are not added together. Dodge cancels the first six startup ticks of a basic attack or begins after its active window, but does not erase every recovery frame.
+
+Physical damage uses **Crush, Pierce, and Slice**, matching the player's real attack animation families. Armor is a declared equipment or structural property, not a hidden species resistance. Successful damage has a minimum of one after one final rounding. Elemental payloads resolve separately and do not inherit physical multipliers.
+
+| Armor class | Crush | Pierce | Slice | Visual and tactical meaning |
+|---|---:|---:|---:|---|
+| Bare ribcage | 1.25 | 0.70 | 1.00 | Gaps waste narrow thrusts; blunt impact breaks structure |
+| Barnacled plate | 1.25 | 1.00 | 0.70 | Heavy shell deflects glancing cuts |
+| Ropebound cloth | 0.90 | 1.00 | 1.25 | Exposed lashings reward a cut |
+| Unarmored flesh | 1.00 | 1.00 | 1.00 | No starting weapon is secretly required |
+
+Damage equals base physical damage times armor multiplier times capped run modifiers, plus separately resolved current damage. Additive run damage bonuses cap at +50% in the slice. There are no random critical hits. A named icon and tooltip identify armor after the first encounter, while impact sound and a small shape-coded number indicate resistance. No mandatory encounter requires finding one rare damage class.
+
+### Weapons and enemy roles
+
+| Starting weapon | Actual family / action | Base damage | Startup / active / recovery | Purpose |
+|---|---|---:|---|---|
+| Knucklebell Mallet | Bone / Crush | 24 | 12 / 6 / 24 ticks | 20-unit arc; breaks ribcages and plate |
+| Sounding Pike | Wood / Pierce | 17 | 9 / 5 / 17 ticks | 30-unit narrow lane; safe spacing |
+| Ropeknife | Bone / Slice | 18 | 8 / 6 / 16 ticks | 22-unit arc; severs cloth bindings |
+| Ringer's Fist | Hands / Crush | 10 | 7 / 4 / 13 ticks | 14-unit fallback; never lost |
+
+These are designed gameplay identities for the Bone, Hands, and Wood sets, not verified individual filenames or claims that every named silhouette exists. Select the closest honest export during implementation. If the pike shaft or mallet head is missing, draw a small original overlay instead of relabeling a fist as a spear. Weapon sockets are authored per animation, and the practice yard can display true attack shapes.
+
+Enemy states are idle, acquire, reposition, windup, active, recover, stagger, and dead. Navigation updates at 10 Hz on a cached walk grid, while movement integrates at 60 Hz. The final 12 windup ticks lock aim. An active melee shape never spins to follow the player. A room coordinator allows at most two simultaneous melee windups and one ranged attack in the slice. Waiting enemies seek space instead of stacking invisibly inside a doorway.
+
+The Drowned are people whose final words remain caught in Orsail's old mechanism. Their skeleton appearance is a readable art solution; the fiction does not require realistic decomposition. Their movement is ceremonial rather than feral. Sometimes a defeated one finishes an ordinary sentence: a bread order, a weather complaint, a name. These short lines humanize them without stopping combat for a speech.
+
+| Drowned role / real variant | HP / speed | Armor | Telegraph and attack | Recovery and answer |
+|---|---|---|---|---|
+| Rattle / skeleton base | 32 / 44 | Bare ribcage | 36-tick arc, 10-damage sweep | 36 ticks; step out, then strike |
+| Nailrunner / skeleton rogue | 26 / 64 | Ropebound cloth | 36-tick dotted lane, 12-damage lunge | 42 ticks; sidestep locked direction |
+| Dragwright / skeleton shaman | 36 / 30 | Bare ribcage | 54-tick hook line, 8 damage and 20-unit pull | 60 ticks; break line of sight or interrupt |
+| Chapel Guard / skeleton warrior | 68 / 30 | Barnacled plate | 54-tick broad arc, 18-damage cleave | 54 ticks; crush or flank |
+
+The Dragwright's net and anchor are separate original effect overlays; they are not assumed to exist in the supplied sprites. Its pull cannot move a player through a wall or into an untelegraphed instant-kill pit. A brief rope line shows the intended displacement. Nailrunner uses rogue art but is not a stealth ambusher: it remains visible and cannot strike from outside the camera.
+
+The living reef people call themselves the **Keld**. Wickharbor calls some of their crews raiders because they seize salvage and cut marked ropes, but they are not a universally evil species. Their islands lost access to fishing grounds when the Ebb changed currents. A Keld captain may negotiate, and the game's journal distinguishes a hostile crew from a whole people. Orc Crew art supplies their silhouettes; all cultural names and motives are original.
+
+| Keld role / real variant | HP / speed | Armor | Telegraph and attack | Recovery and answer |
+|---|---|---|---|---|
+| Breaker / orc base | 44 / 42 | Unarmored flesh | 42-tick raised marker, 12-damage shove | 36 ticks; deny wall pressure |
+| Linecutter / orc rogue | 30 / 68 | Ropebound cloth | 36-tick paired footprints, 14-damage flank dash | 42 ticks; cut off its return lane |
+| Brinecaller / orc shaman | 38 / 32 | Unarmored flesh | 60-tick vessel sigil, grants one ally 16-point ward | 60 ticks; interrupt support first |
+| Reefshield / orc warrior | 80 / 28 | Barnacled plate | 60-tick lane, 20-damage shield rush | 60 ticks; bait obstacle, punish flank |
+
+Wards last six seconds, never stack, and cannot target the caster. Idle body contact deals no damage. Enemy collision permits gentle separation so crowds cannot permanently imprison a player. The vertical slice ships the four Drowned roles; Keld roles arrive with Sluiceward and a negotiation scene. No living raider drops a magically regrowing civilian identity for a farming economy: defeated crew members retreat or are treated abstractly in the same encounter rules, without a loot incentive to target peaceful residents.
+
+### Missing attack animation is a production fact
+
+The inventory establishes Idle, Run, and Death coverage for the enemy crews, not full attack sets. Prototype an attack using a held pose, a two-pixel anticipation lean, a separately drawn weapon or rune, a fixed ground preview, and a recoil pose. Hit timing lives in simulation data and never depends on an art tween ending. These transformations are a declared prototype treatment, not nonexistent frames attributed to an artist.
+
+Before public release, create distinct windup, strike, and recovery silhouettes for all shipping roles. Keep Up, Down, and Side readable. A telegraph drawn behind a wall is not a fair warning; occluded threats must reposition or expose a visible floor marker. Death collision ends immediately on the confirmed dead event, while the Death animation may finish harmlessly. Blood, bone particles, and screen shake are decorative and individually reducible.
+
+### First boss: the Sexton of Silt
+
+The Sexton maintained Orsail's municipal burial bell. Its name-cylinder jammed on a list of unpaid burial fees, leaving it unable to finish the service. It now treats every visitor as another unfiled death. The joke is sad rather than mocking: a bureaucracy continued working long after the clerks drowned. Defeating it frees the cylinder, not a fragment of a god.
+
+Prototype with skeleton warrior art and a unique bell-cage overlay; final presentation needs an original headpiece and tool silhouette. The 28-by-20-tile arena has four solid coffins, two wide circulation lanes, and no hidden pit. Baseline health is 720, movement 28 units per second. Target first successful combat time is 90–150 seconds, measured from actual attack uptime rather than nominal damage alone.
+
+Above 65% health, Grave Sweep marks a 100-degree arc for 54 ticks, deals 20 damage over a six-tick active window, and recovers for 54 ticks. Ledger Charge marks a three-tile lane for 60 ticks, deals 18 damage once, then leaves 60 ticks of recovery. Charge cannot immediately repeat. The arena's coffins break the charge but do not delete its warning.
+
+At 65%, a 90-tick transition clears hostile projectiles, retracts hazards, and closes the Sexton's bell-cage shield visibly. It moves to the center without contact damage. Phase two adds Silt Ring: a 72-tick floor preview followed by an expanding ring with a four-tile gap aimed toward reachable floor. One hit deals 16 damage. Two Rattles may emerge from marked coffins at most once every fifteen seconds; the living summon cap is two, and summoned enemies grant no permanent currency.
+
+At 30%, summoning stops. The Sexton floods one marked third of the arena after a 90-tick preview, leaving two-thirds available. This local magical hazard deals eight damage per second with ordinary hurt immunity; it is distinct from the run-ending global tide. The boss alternates Sweep and delayed Charge with at least 30 escape ticks between active threats. Warnings never become faster than the player learned. Death retracts the arena water, settles the boss state once, and opens the emergency stair. The run clock continues so victory and escape remain separate achievements.
+
+## 4. The Ebb, generation, and the climb out
+
+### A clock that the player can reason about
+
+The slice has a sixteen-minute active tide budget, with an expected successful run of twelve to sixteen minutes. The first complete single-biome release uses twenty-four minutes. At 60 Hz these are simulation deadlines, not wall-clock deadlines during a paused solo game. Loading, dialogue at home, and explicit solo pause do not consume the tide. Opening the inventory alone does not pause unless the player uses the visible pause control; the distinction is consistent and explained.
+
+The first 60% of the budget is Low Water. From 60% to 85%, Rising brings gutter water, a low bell, and route-cost emphasis. From 85% onward, Last Bell adds a persistent directional exit marker and stronger shoreline sound. At 100%, an announced five-second grace sequence allows a player already on an exit interaction to complete it; otherwise the tide takes them. The grace is not a hidden extra loot period and is identical for every run. Story mode can extend the budget by 25% without changing rewards.
+
+Tide pressure first changes information and opportunity, not movement speed. Mandatory routes do not silently seal while the player is below. Optional lower treasure alcoves may close at Rising only if labeled before entry and if their exit remains traversable. No global water effect becomes a surprise instant kill. The map estimates return time from graph distance and known stair traversal, with a conservative safety margin; it says “estimate,” not a false guarantee during combat.
+
+### Rooms before algorithms
+
+Generate a mission graph, attach authored Tiled rooms through compatible door sockets, then select validated encounters. The slice contains twelve rooms across two depth bands: entry, six combat rooms, treasure, a lift landing, optional elite, pre-boss shelter, and boss. Four combat rooms lie on the critical route; two join the elite branch. The landing appears before the lower band and always offers a climb out. After the boss, a shorter emergency stair opens so the return is tense without forcing a tedious full backtrack.
+
+Start with sixteen templates, including alternate combat layouts and two landing arrangements. Each stores dimensions, socket directions, encounter budget, spawn slots, cover, allowed enemies, and estimated travel cost. Do not rotate art blindly: a coffin, wall face, or stair may only support its authored orientation. Environment art has no authority over combat collision until a designer marks it in the map data.
+
+The Undercroft uses szadiart walls, floors, doors, stairs, coffins, candles, torches, and spikes. It is dry because ancient pressure gates and trapped air hold back standing water during the Ebb, not because the kingdom is inexplicably above sea level. Sluiceward later uses anokolisa dungeon and selected water tiles for narrow streets, cistern edges, and maintenance channels; full coastal exteriors need extra art. Water art alone is not a working fluid simulation. Deep water is a clear blocked boundary until swimming has its own design.
+
+Use a seeded 32-bit PRNG with independent streams for topology, encounter selection, loot, and decoration. Store seed, generator version, content manifest hash, and depth band. Cosmetic torch flicker never consumes combat random values. Validate connectivity, door pairing, spawn clearance, exit reachability, boss access, and a conservative maximum return distance. Retry up to eight deterministic candidates, then use a known-good fallback layout and log why it was selected.
+
+### Encounters and rewards
+
+Threat costs are Rattle 1, Nailrunner 1.5, Dragwright 2, and Chapel Guard 2.5. The first fight costs 1; later upper rooms cost up to 3; lower rooms range from 3 to 5. At most six ordinary enemies are alive simultaneously. Staged reinforcement requires a marked entrance and never spawns within two tiles of the player. Lower-band health is multiplied by 1.15 and damage by 1.10. Rising tide does not secretly multiply every enemy statistic; it makes the remaining time valuable.
+
+Elites receive one named rule plus 40% health. “Keelbound” resists knockback. “Afterknell” leaves one delayed floor pulse after a heavy attack. Their preview badge names the rule, and neither can appear in the tutorial room. Do not stack speed, regeneration, and extra projectiles on the first elite. Treasure rooms offer three distinct relics or a small material salvage payout. A dead-end branch advertises its approximate room cost before the player commits.
+
+Spikes preview for 48 ticks, rise for 30, and rest for 90, with a safe alternate lane in Normal. Every combat spawn has room to dodge, no blocked feet position, and no immediate ranged line from outside the camera. A renderer can fade foreground arches, but it cannot excuse illegible attack geometry. Room clearing removes hostile residual projectiles before creating a reward on safe ground.
+
+The generation test suite runs ten thousand seeds for each released generator version, storing failures as fixtures. It checks graph reachability, no rewards under blockers, no spawn overlap, and exit-distance budget. Human playtests then check boring backtracking and encounter readability, which automatic connectivity cannot measure. Record fight time, traversal time, damage source, optional-room choice, and remaining tide on extraction. Remove repetition before speeding every enemy to hit a session target.
+
+## 5. Death, ranks, and Wickharbor's growth
+
+### What the sea returns
+
+The bond gives a Bellringer continuity, not invulnerability. A death summary names the last two damage sources and one useful counter, then offers an immediate dawn return. Tide capture has a separate summary showing the last safe exit passed and remaining route distance. Neither displays mocking text, a repair bill, or an escalating failure tax. The player may skip the beach animation after seeing it once.
+
+| State | Death or tide capture | Safe extraction | Next Ebb |
+|---|---|---|---|
+| Health, resonance, cooldowns | Discarded | Discarded | Starting values restored |
+| Temporary relics, weapon rolls, spell tunings | Lost | Salvaged only by explicit rule | Fresh build |
+| Unbanked materials and bell objective | Lost; objective returns to its source next run | Banked exactly once | Village store retained |
+| Witnessed inscriptions and journal facts | Kept | Kept | Remain readable |
+| Recipe already recorded | Kept | Kept | Starting option available |
+| Rank marks from first discoveries | Kept immediately | Not paid twice | Profile total retained |
+| Restored bells, buildings, residents, dialogue flags | Kept | Kept | World state persists |
+| Active run snapshot | Closed permanently | Closed permanently | New seed |
+
+The name-cylinder is restored to its boss source after a failed escape; the world does not contain duplicate canonical bells. A boss defeated once may return as an unsettled echo on subsequent expeditions until the bell is restored, with a journal explanation. Once the bell is settled, repeat challenges are framed as resonant rehearsals and grant ordinary materials, not endless copies of the story objective. This prevents procedural repetition from contradicting permanent village change.
+
+Rank marks come from new charted rooms, unique inscriptions, restored bells, and quest conclusions, not repeat kills. Suggested cumulative thresholds are Wickbearer 0, Sounder 20, Ropetender 60, Bellhand 130, Shorewarden 240, Deep Listener 400, and Last Ringer 650. These ranks are original order traditions, not character classes. Wickbearer starts with the training kit. Sounder unlocks one extra material slot. Ropetender opens optional chart routes. Bellhand grants a tuning preset. Shorewarden adds a cosmetic rope knot and advanced trials. Deep Listener unlocks late narrative work. Last Ringer is a title for completing the order's central oath, not an infinite damage multiplier.
+
+Only the first two ranks are realistically earnable in the slice. Display later traditions in a journal essay rather than functional-looking locked buttons promising unavailable content. Repeated successful runs grant a small crafting income, but failure cannot be optimized into a better permanent reward rate than safe extraction. Keep raw health growth capped at a single optional +10-health comfort upgrade; offer an unmodified challenge profile for players who want a stable baseline.
+
+### A village repaired by useful work
+
+At first, Wickharbor contains the Warm Nail's usable common room, a bonfire, the bell yard, a rope lift, and two active residents. The first extracted material bundle repairs a furnace. The first recovered bell fitting brings a smith. Restoring the first bell opens the anvil, lights a dry tavern alcove, and attracts an alchemist. A later bell repairs the sawmill gantry and adds beds. Growth is keyed to achievements and banked supplies, never to deliberately accumulating deaths.
+
+Promote only the required HOLD assets: tavern folk, a few citizens, knight/rogue/wizard archetypes, anvil, furnace, alchemy bench, sawmill, cooking or bonfire set, and selected village pieces. HOLD means preserved for later use, not permission to assume all those files are ready in the runtime folder. Village mockups guide composition but are not playable maps. Keep trees and broad outdoor dressing for a later visual pass. A compact cliff shelter can work before an entire exterior village is authored.
+
+The furnace turns three scrap into one iron cake. The anvil spends two cakes and one bone fitting to unlock a weapon pattern. Alchemy combines two herbs and one saltglass into a starting tonic recipe. The sawmill later converts driftwood into roof and lift repairs. Cooking offers one departure meal choice, not a permanent stack of overlapping buffs. Crafting is immediate, previews the cost, and commits atomically; no real-time timers or idle queues in the slice. Recipes are permanent options, while expedition gear remains temporary.
+
+The knight sprite represents **Tamsin Rook**, a former stair guard who teaches safe spacing and is terrified of deep water. The rogue becomes **Pell Vetch**, a rope surveyor who can estimate a return route but routinely loses his own keys. The wizard represents **Doctor Ossa Fen**, a practical almanac keeper who insists that magical phenomena be measured before being named. Tavern folk and citizens become original residents with modest schedules in authored scenes, not a promised autonomous life simulation.
+
+A first bell should change at least three observable things: one practical service, one resident's circumstance, and one sound in the village mix. This gives recovery emotional weight without building housing simulation, farming, or a complex economy. The harbor never becomes so sprawling that reaching the next expedition takes longer than preparing for it.
+
+## 6. Three village voices and a three-act story
+
+### Factions with something worth hearing
+
+The **Choir of the Open Door**, led by **Cantor Meret Vale**, believes each restored bell should be rung in its full old sequence. Meret was raised by a grandmother who could still sing a drowned relative's kitchen songs. She wants the kingdom awake because forgetting feels like a second drowning. Her quests recover names, protect burial instruments, and restore public ringing. A Choir expedition modifier grants stronger resonance recovery after a clean room but introduces one additional ceremonial encounter. It is opt-in and listed before departure.
+
+The **Quiet Ledger**, led by **Iven Sere**, keeps the names of those who never received a proper farewell. Iven is a former salvage assessor who discovered that families had been charged rent for preserving a dead voice. The Ledger wants the mechanism dismantled and the dead released, but not erased. Its quests return personal objects, document exploitation, and perform brief closing services. Its modifier offers fewer enemies and less temporary loot, with more inscriptions and no reduction in story access. It is a different purpose for a run, not an easy-mode moral judgment.
+
+The **Lantern Quay Company**, led by **Director Bera Flint**, finances lifts, food imports, and salvage rights. Bera's accounts really do keep Wickharbor fed; she is also willing to patent grief if nobody stops her. The Company wants predictable Ebb windows and ownership of the bell network. Its modifier adds a timed cargo objective and better bankable materials while reserving a share of that run's bonus payout. The departure screen shows the exact share; ordinary objective rewards are not secretly taxed.
+
+All three can tell the truth selectively. Meret underestimates the dead's wish to leave. Iven can mistake silence for consent. Bera treats the survival of a balance sheet as proof that a system is humane. No faction owns the only viable weapon family or permanently bars the player from core story. Early tasks may be completed for all three. Later commitment is an explicit story choice with a journal summary of consequences, not a hidden reputation threshold triggered by selling ten herbs.
+
+### Act One: The First Answer
+
+The player swears the shore bond, learns the Undercroft route, and recovers the Sexton's cylinder. The first restored bell settles a small group of Drowned for one night, proving that ringing can help. It also speaks an unfinished line in a living child's voice. The village divides over whether that is a miracle, a malfunction, or a warning. The act ends when the player finds evidence that somebody recently altered the cylinder, not six generations ago.
+
+Meret asks for a full ringing, Iven requests a transcription before anything sounds, and Bera offers the tools for both in exchange for salvage access. The player can choose an immediate practical response without locking an ending. The tampering was done by a desperate former Bellringer trying to speak to a drowned partner. This individual is responsible for a harmful act without making grief itself the villain.
+
+### Act Two: The Borrowed Choir
+
+Sluiceward and the Knife Reefs reveal that the great bells are not simply broken. They have been diverted into the old machine's growing store of held voices. Keld crews have been removing bronze fittings to stop a new current that is destroying their homes. A negotiated passage can reduce one hostile route and reveal a reef rescue; violence remains possible but is not the only source of progression.
+
+The player reaches the Cathedral of Held Breath and hears testimony from dead people who disagree with each other. Some want release, some fear it, and some want to warn living descendants. The Undertide explains its bargain without claiming moral perfection. The queen's daughter, preserved as a repeating voice, asks the player not to mistake a perfect recording of love for a living person who can change. The act ends with the discovery that every complete bell sequence currently strengthens the royal machine even while calming local dead.
+
+This reversal does not make earlier help meaningless. A settled burial chamber really is safer, and a recovered name really mattered. It changes the cost of repeating an action without understanding its destination. New quests ask the player to separate local comfort from centralized captivity. Each faction must revise its position or reveal why it cannot.
+
+### Act Three: The Shore We Choose
+
+At the Deep Steeple, the player can reroute the restored bells. The final decision has three original visions rather than a simplistic good/bad slider. It depends on documented preparations, but no ending is locked behind an undisclosed collectible count. The Almanac shows which practical work remains and offers a return route before commitment.
+
+**Open the Kingdom:** reconnect the great bells and give the held voices bodies of salt and borrowed time. Orsail returns during each Ebb as a city of living and dead together. This fulfills Meret's hope but creates a society whose nights must be sustained carefully; the dead cannot simply take back homes occupied by descendants. The epilogue centers on consent, new law, and the work of coexistence rather than declaring resurrection free of consequence.
+
+**Finish the Farewell:** dismantle the holding machine after copying its names into a public record. The dead leave, the Ebb gradually becomes an ordinary tide, and the Bellringers' return bond ends after a final safe homecoming. Wickharbor becomes a fishing harbor and memorial town. This is not annihilation of identity: names, stories, and changed lives remain, while the player accepts that a future death will be final.
+
+**Keep an Open Shore:** distribute the network into small, locally governed bells and break the machine's monopoly. A dead person may answer once, refuse, or depart; no one may be kept by purchase or royal command. The Ebb remains shorter and less predictable, and the village must share stewardship with the Keld. This third path requires trust-building and a new bell protocol, not a secret golden ending that grants every wish. It preserves contact but surrenders certainty and profit.
+
+The solo campaign records its chosen ending in a separate completed chapter. Repeat expeditions thereafter are explicitly pre-ending recollections or challenge rehearsals, so an ending that ends immortality does not casually restore it for loot. Shared online spaces later use a declared chapter state and avoid letting one player's ending rewrite strangers' worlds without consent.
+
+### Narrative delivery and scope boundary
+
+A conversation scheduler stores speaker, prerequisites, priority, one-shot status, minimum spacing, and alternative lines. On arrival, show at most one automatic short exchange: urgent consequence first, then quest conclusion, relationship beat, optional lore, ambient repeat. Other residents receive small markers. Skipping dialogue preserves the journal summary and never blocks the gate. A first-time winner gets different text from someone who died; the script must not invent experiences.
+
+A sample original exchange captures the tone:
+
+> **Pell:** “I marked the way back with excellent rope.”  
+> **Ossa:** “You marked it with my washing line.”  
+> **Pell:** “Then it will be both safe and surprisingly fresh.”
+
+The slice contains awakening, one first-return variation for each outcome, the cylinder discovery, the first bell service, and three faction responses. Later acts are fully outlined here but are not included in the vertical-slice production count. Companions, romance, autonomous schedules, dynamic ecology, and global village attacks are deferred. Authored dialogue flags are not advertised as a simulated living world.
+
+## 7. Items, loot, and the four currents
+
+### A small economy with clear borders
+
+The run bag has eight material slots, stacks of 99, two weapons, one active current spell, one consumable stack of three, and six relic sockets. Sounder rank adds one material slot. Auto-pickup gathers eligible materials and run tokens within 24 units after combat; it never replaces a weapon automatically. A full bag leaves the object visible and offers a compare or discard flow. Nothing vanishes because a tooltip covered it.
+
+Definitions own stable IDs, names, descriptions, icons, armor or weapon tags, and affix pools. Instances own generated IDs, rolled values, source run, and temporary modifiers. Save IDs, not translated labels. The Clockwork Raven atlas supplies reviewed icon regions for scrap, bone fitting, herb, driftwood, iron cake, saltglass, and recipes. Similar icons need different silhouettes or border symbols as well as color.
+
+| Source | Proposed reward | Protection against empty or useless outcomes |
+|---|---|---|
+| Ordinary room | 60% materials, 25% run tokens, 15% minor tuning | First clear guarantees a material bundle |
+| Treasure | Choose one of three relics or salvage | Exclude equipped duplicates before rolling |
+| Elite | Weapon offer plus two materials | Match at least one carried family |
+| Lift landing | One 25-health flask and exit access | Flask usable once; no surprise ambush |
+| First boss escape | Cylinder, recipe choice, 20 rank marks | Story payout once per profile |
+| Repeat boss escape | Materials and a small token conversion | No duplicate bell objective |
+
+Run tokens buy temporary supplies at a later optional vendor; they convert at a stated low rate on safe return and vanish on failure. Rank marks are not currency. A blueprint recorded on discovery persists, while a physically carried bell objective requires extraction. This distinction is shown by a journal-seal icon versus a bag icon and explained on the first pickup.
+
+Relics change decisions. **Longhaft Knot** adds six units of pike range and three recovery ticks. **Dry Wick** grants a 12-point shield after a no-damage room and loses it on the next hit. **Mourner's Thumb** widens Water's slow field but raises its resonance cost. **Cracked Clapper** improves Crush stagger but makes its warning sound louder, drawing one extra repositioning enemy without creating offscreen attacks. **Shoreglass Bead** refunds five resonance after dodging through a marked attack, at most once every three seconds. **Patient Bronze** adds four physical damage to the first attack after two seconds without attacking, rewarding deliberate spacing rather than button spam. The slice ships six relic definitions and one pair interaction, not hundreds of uncontrolled modifiers. A relic's disadvantage is visible before selection.
+
+### The Almanac and bell-magic
+
+The order's **Almanac** records tides, names, equipment, and recipes. The craftpix animated spellbook is its visual body. Its Fire, Water, Air, and Earth themes become four original currents of bell-magic, not borrowed schools from another setting. Bell sound gives a current a shape; resonance pays for its use. Icons are menu art, while projectiles and floor effects need new original VFX.
+
+| Current | Meaning | Initial spell specification | Release scope |
+|---|---|---|---|
+| Fire — Hearth | Warmth, warning, preserved ember | Cinder Note: 25 resonance, 14 damage, 120-unit/s dart, 1.2s lifetime | Slice |
+| Water — Undertow | Weight, memory, yielding | Lowwater Seal: 30 resonance, 24-unit circle, 30-tick preview, 8 damage, 25% slow for 2s | Slice |
+| Air — Breath | Distance, voice, carried force | Borrowed Gust: 25 resonance, 40-unit cone, 12-unit push, no pit executions | Second-biome release |
+| Earth — Keel | Structure, endurance, anchoring | Keel Mark: 35 resonance, 20-point shield for 4s, reduced movement by 10% | Second-biome release |
+
+Resonance regenerates at eight per second after two seconds without casting. Boss slows have half strength and at most one-second duration. Spell cooldown is six ticks beyond the cast animation, while resonance remains the main frequency limit. Casting cannot cancel an active physical attack for free. A spell has a preview shape, source actor, sequence ID, lifetime, collision rule, and explicit friendly-fire policy; friendly fire is off in cooperative PvE.
+
+Fire hitting a Water-marked target consumes the mark and creates Steam for two seconds, dealing four damage per second in a 20-unit area. The effect renders behind all danger markers and never blinds the player. Water plus Earth later creates a short Mud Bind, but bosses cannot be rooted and receive a brief slow instead. Air plus Fire can extend a cone at increased cost only after testing. Reactions have a one-second per-target lockout and cannot recursively trigger themselves. An impressive effect that destroys readability is a failed effect.
+
+The book has four practical tabs: Equipment, Currents, Chart, and Names. Left page selects; right page explains and acts. Equipment compares damage class, armor matchups, timing, and reach. Currents shows cost, targeting shape, interaction, and cooldown. Chart marks discovered rooms, lift locations, estimated return cost, and tide state. Names distinguishes witnessed statements from faction interpretations. The animated cover lasts at most 300 milliseconds and can be disabled.
+
+## 8. Art and sound direction
+
+The target is sixteen-pixel top-down fantasy, rendered nearest-neighbor with integer scaling. Use a 480-by-270 logical viewport, centered with letterboxing where needed. Larger monitors do not reveal more tactical map area. Sprite cells may exceed a tile; measure sheet bounds and feet anchors rather than slicing every image into arbitrary sixteen-pixel cells. Keep pixel positions crisp while camera smoothing occurs through carefully rounded render coordinates.
+
+Anokolisa establishes player proportions and creature motion. Szadiart establishes Undercroft architecture. Craftpix supplies the Almanac's warm illuminated presentation. Clockwork Raven supplies compact item symbols. Cohesion comes from value hierarchy, restrained saturation, consistent outline weight, and shared lighting, not destructive blanket recoloring. Preserve masters, derive adjusted exports, and record their origin. Catacomb stone stays cold blue-gray; candles and windows are amber; wet surfaces reflect sparingly. Cozy rooms feel warmer, not simply brighter than every telegraph.
+
+Gameplay previews use shapes and contrast: hatched arcs for sweeps, dotted lanes for thrusts, concentric outlines for pulses. Friendly interactions use a consistent glyph. Foreground arches fade when they cover the player or an active attack. Fog, rain, screen shake, and splash particles never obscure feet or safe gaps. No water shader is required for the slice; a few animated edge tiles can carry the mood at lower cost.
+
+The missing-art list is explicit: HUD bars and slot frames; enemy attack silhouettes; the Sexton's unique bell cage and tool; drag hooks and nets; dodge smear, current spells, steam, impacts, tide capture, rope-lift effects; cliff/coast transitions; and any weapon overlay the existing families lack. Prototype with simple geometry, then replace the shipping set. Enemy Death frames do not prove attack coverage, spell icons do not prove spell animation, and a village mockup is not a map.
+
+The inventory did not establish separate editable font binaries. Preview text images and references to Digital Disco do not grant a webfont license. Begin with a readable system font for interface text and acquire a separately licensed display font only if it remains legible and embeddable. Small decorative runes may be images; essential instructions may not.
+
+All audio is a new production need. Start with two core pieces: a two-minute Wickharbor theme built around muted strings, a small bell, and breathy reed; and a two-minute delve loop with a sparse percussion layer that can intensify during Rising. A short boss variation reuses the delve harmony, with one original transition cue and a victory cadence. This is a realistic first music scope, not a promise of a regional orchestra or voice cast.
+
+Create about twenty sound events: three swings, three impacts, dodge, hurt, death, two enemy warnings, two casts, spell impact, pickup, door, book open/close, lift, bell restoration, and tide warning. Limit simultaneous voices, prioritize danger cues, and give master/music/effects controls. Audio begins after a browser user gesture. Every essential sound has a visible equivalent; captions identify the final tide warning. The village mix gains one quiet bell tone after restoration, making progress audible without repeating a full fanfare every visit.
+
+## 9. UI, controls, and access
+
+Recommend WASD plus mouse aim because independent movement and aim suit retreating, lane attacks, and future co-op. Left click attacks, right click casts, Space dodges, E interacts, Q swaps weapons, 1 uses a tonic, Tab opens Chart, B opens the Almanac, and Escape pauses solo or closes the top overlay. Suppress scrolling and context menus only while gameplay has canvas focus. A return click after focus loss resumes, rather than immediately swinging a weapon.
+
+Keyboard-only parity uses WASD movement, arrow-key aim, J attack, K cast, Space dodge, E interact, and Q swap. Without a held aim key, retain the last deliberate direction. Optional narrow-cone aim assistance selects only visible targets and locks during committed attacks. Rebinding detects conflicts and supports reset. Controller support is a later milestone requiring its own menu and aim tests, not a falsely complete launch feature.
+
+HUD priorities are health with a number, resonance, dodge readiness, current weapon/class, spell, tonic count, material capacity, and the tide. The clock displays remaining time and named phase; it never relies on blue turning red. A directional lift marker appears at Last Bell and can be enabled earlier. Boss health is separate from the tide and never covers the safe arena gap. Floating loot notices combine repeated materials and can be disabled.
+
+The Almanac uses an accessible HTML text layer over the canvas. Keyboard focus order is stable, descriptions can be selected, Escape closes, and reopening restores the last tab. A visible Pause button suspends solo simulation; the book alone leaves the clock running. Multiplayer menus state that the world continues. Shared pause requires unanimous agreement in a safe room and is not implemented by freezing one client's renderer.
+
+Interaction priority is reward, exit, station, then dialogue. If two objects overlap, show a small choice list rather than activating both. Extraction confirmation shows banked rewards, lost temporary effects, and completion state. There is no modal confirmation for every herb. A held key from opening the book cannot immediately purchase a recipe. The first tutorial reaches combat in under two minutes and teaches the exit before introducing an elite.
+
+Accessibility release conditions include adjustable text size, high-contrast shapes, color-independent armor symbols, reduced motion, zero shake, flash suppression, hold-to-repeat attack, remapping, readable dialogue, and no required rapid tapping. Story mode uses 0.70 incoming damage, 1.20 player damage, and optionally 1.25 tide time, with the same story rewards. A separate slow-combat solo assist runs at 80% speed; online participants cannot each select a different simulation rate. No option labels the player as lesser for using assistance.
+
+Test menus and journal at 200% browser zoom and with a screen reader. A canvas aria label alone does not make action combat accessible; state remaining limitations honestly. Death and tide summaries have unlimited reading time. Tabs losing visibility pause solo and save safely; online disconnection behavior is announced before joining. No daily obligation, battle-pass countdown, or premium retry belongs in the first design.
+
+## 10. Browser technology and content pipeline
+
+### Engine decision
+
+Recommend **Phaser 3**, initially pinned to the 3.90 release line after a small compatibility fixture, rather than following a floating latest tag. The inspected documentation exposes later versions too, so implementation must use the selected version's API reference. Phaser provides scenes, input, cameras, audio, tilemap support, animation management, and lightweight Arcade Physics suitable for top-down rectangles and circles. Its loader explicitly supports Tiled JSON and Aseprite PNG-plus-JSON data. Those capabilities reduce integration work for a two-person studio.
+
+PixiJS is an excellent rendering engine but leaves more game-level scene, collision, map, and tooling decisions to the team. KAPLAY is attractive for concise prototypes and a small approachable API; the deciding issue is not that it cannot make this game, but that Phaser's documented map and animation pipeline better matches this library and intended production path. A one-room fixture must load Body_A, a catacomb map, a weapon overlay, and a book frame before the engine choice becomes a long-term commitment.
+
+Do not make Phaser objects the authoritative game model. Put movement, collision, damage, enemy decisions, inventory, PRNG, tide state, and settlement in a plain TypeScript simulation package with no DOM, canvas, or Phaser import. Phaser renders snapshots and sends commands. Arcade Physics can support editor/debug prototypes or non-authoritative presentation, but the shipped shared simulation owns gameplay collision through simple AABBs, circles, and swept projectile tests. Two competing physics systems must not both decide whether a hit occurred.
+
+### Proposed project layout
+
+The following is a future implementation layout, not a claim that files were added during document delivery:
+
+- assets/game/anokolisa/original-pack/: selected player, enemies, weapons, dungeon tiles, and props.
+- assets/game/szadiart/rogue-fantasy-catacombs/: first-biome environment exports.
+- assets/game/craftpix/free-animated-magic-book/: selected book, theme, frame, and icon exports.
+- assets/game/clockwork-raven/free-raven-fantasy-icons/: reviewed sixteen-pixel atlas.
+- assets/future/: HOLD selections not loaded by the game.
+- packages/sim/src/: math, commands, collision, combat, AI, loot, tide, generation, and settlement.
+- packages/content/: schemas, room definitions, item tables, dialogue, and manifest.
+- apps/client/src/: Phaser scenes, rendering adapters, audio, input, accessible overlays, and local transport.
+- apps/server/src/: future authoritative rooms, sessions, snapshots, admission, and persistence.
+- tools/: export validation and asset-manifest generation.
+- tests/: deterministic fixtures, generation seeds, combat timing, saves, and network impairment cases.
+
+Retain creator subfolders and original provenance. Runtime builds load a small allowlisted manifest, not every image under assets. Masters stay outside public deployment outputs. The supplied audit's earlier counts and path proposals are snapshot evidence, not proof that every destination already exists now. No current repository inspection is needed for this deliverable, and no raw-art publication is authorized.
+
+Aseprite exports pair PNG atlases with JSON frame bounds, durations, and tags. Use stable tag names such as player.crush.down and enemy.rattle.run.side. Preserve trim/source-size offsets so feet and weapon sockets do not wobble. The loader's Aseprite path supports tagged JSON; confirm the chosen Phaser version with a fixture rather than assuming a packed PNG alone contains timing. Where only existing PNG sheets are available, author a sidecar manifest by measured frame bounds instead of inventing JSON that was never supplied.
+
+Tiled rooms use orthogonal sixteen-pixel maps, exported as JSON with explicit collision, door sockets, spawn points, tide-safe routes, reward anchors, and decoration layers. Build-time validation rejects unknown tileset references, missing sockets, unsupported rotation, and spawns inside solid tiles. Keep the craftpix example TMX and its dependencies together as reference; it is not automatically a gameplay room. Collision comes from authored properties, not the brightness of a wall pixel.
+
+### Saves and performance
+
+Use localStorage only for small preferences and a profile pointer. IndexedDB stores versioned profiles, journal flags, banked inventory, and cleared-room suspension snapshots. Write a new record, validate it, then atomically switch the active pointer; retain one previous valid profile. Save schema version and content version separately. Migrations copy before transforming, and unsupported newer saves produce a clear message instead of silently resetting progress. Offer explicit export/import with a checksum; explain that clearing browser data can remove local progress.
+
+Save at departure, cleared room, reward choice, extraction settlement, and dawn return. A run ledger records a unique settlement ID so a refresh cannot pay twice. Solo offline saves are user-controlled and not anti-cheat secure. Later online progression is server-owned in a separate profile namespace; do not automatically upload arbitrary local inventory into a shared economy. A visibility-loss snapshot cannot safely serialize a half-resolved attack, so pause on a tick boundary and resume with the same command queue or return to the last cleared-room boundary with a disclosed policy.
+
+Target 60 rendered frames per second on a modest laptop, with a 16.7ms frame budget and simulation normally below 4ms. These are budgets to measure, not proven device results. Cap active enemies at six in the slice, pool projectiles and particles, cull offscreen decorations, avoid per-frame allocations, and cap device pixel ratio. Keep initial compressed game download near 12MB and first playable interaction under ten seconds on a reasonable broadband connection, excluding user-gesture audio start. Profile before making binary packing or Web Workers mandatory. A reduced-effects mode removes cosmetic fog without changing information.
+
+## 11. Multiplayer in three earned phases
+
+### Phase one: solo, entirely client-side
+
+The local client advances packages/sim and renders its snapshots. Input commands use actor ID, monotonic sequence, intended tick, movement axes, aim angle, and action bits even before a network exists. This command boundary is an architectural seam, not a reason to build online accounts early. Seeded tests and recorded command replays make bugs reproducible. There is no multiplayer button that only opens an empty lobby.
+
+### Phase two: a self-hosted Node.js expedition
+
+Use Node.js with **Socket.IO**, room-based cooperative PvE for two to four players. Socket.IO supplies event transport, connection handling, and server-side room routing; it is not a physics engine, authoritative simulation, or automatic scaling system. The ws package is a leaner standard-WebSocket server option with lower abstraction overhead, but would require more reconnect, heartbeat, room, and protocol plumbing. For this team, choose Socket.IO first and move only if measured bandwidth or CPU justifies a rewrite. Browser clients use socket.io-client, not the Node ws module.
+
+The server owns enemies, positions, hit tests, tide, rewards, and settlement. Clients send intentions, never damage totals or a claimed boss victory. Run a 60 Hz simulation and initially broadcast snapshots at 20 Hz, with 60 Hz client rendering. Accept bounded input rates and reject impossible speed, stale sequence replay, invalid inventory IDs, or actions during cooldown. Quantize positions consistently; do not trust client wall-clock timestamps as authority.
+
+Predict only the local player's movement and dodge presentation using shared simulation rules. Each snapshot acknowledges the last processed input sequence. The client restores authoritative local state and reapplies unacknowledged inputs, smoothing small visual corrections without smoothing collision truth. Remote actors interpolate approximately 100ms behind server time. Limit extrapolation to 100ms, then hold and display a connection warning. Predicted hit sparks are tentative; authoritative damage and loot reconcile by event ID. Never predict a permanent currency award.
+
+Use reliable idempotent events for room transitions, objective pickup, reward selection, death, and settlement. Snapshots may be dropped when superseded. Carry protocol version, run ID, server tick, acknowledged input, entity states, tide deadline, and event references. Send a full baseline on join or reconnect; later snapshots can be deltas against an acknowledged baseline. Start with readable validated JSON; optimize only after packet measurements. Apply message-size limits, per-session rate limits, room membership checks, and bounded queues.
+
+One expedition has one authoritative room owner and one global tide deadline. Scale enemy health by 1 + 0.55 times additional players, and enemy count modestly within tested caps; do not simply quadruple visual clutter. Boss damage stays unchanged initially. Friendly fire is off. A downed player has a 20-second rescue window; a teammate channels E for three uninterrupted seconds. A fully lost player watches until the next safe landing, where one rescue can be offered at a stated group cost. These rules require co-op playtesting and do not replace the solo death bond.
+
+Extraction is a group choice at a safe lift, with a ten-second vote and clear majority rule; a tie defaults to staying until a second confirmation, except Last Bell defaults to extracting to prevent griefing. A disconnected player's character becomes inert and protected for ten seconds, then is removed with its bag held server-side for a 60-second reconnect grace. The tide does not pause. Reconnect tokens remain private, expire, and cannot be used to join another player's identity. No host migration is promised in the first self-hosted build; a server crash restores the last safe room checkpoint without duplicating settlement.
+
+### What runs on the host machine
+
+The implementation milestone supplies a root npm workspace with client, server, shared simulation, and content packages. Runtime dependencies are phaser in the client, socket.io-client for transport, and socket.io plus a schema validator such as zod on the server. Development dependencies are typescript, vite, tsx, and vitest. Pin a supported Node LTS release at implementation time and commit its lockfile then; this document does not guess a future secure patch version.
+
+The deliverable scripts for that milestone are npm ci, npm run dev:lan, npm run build, and npm start. dev:lan launches Vite on 0.0.0.0:5173 and Node on 0.0.0.0:3000, proxying the Socket.IO route through the client origin. A friend on the same LAN opens http://HOST-LAN-IP:5173, enters a short invitation code, and joins the room. The host allows only the required application ports through the local firewall. The literal HOST-LAN-IP is an explanatory variable, not an address to publish or store in a save.
+
+For an internet test, build the client and have Node serve its static files and Socket.IO on the same port. Put that origin behind an HTTPS tunnel that supports WebSocket upgrades; share the tunnel's public game URL and a temporary invitation code. Friends do not install Node. Avoid opening a router port as the default novice path. Restrict accepted origins, use short-lived invites, and shut down the tunnel after testing. CORS is not authentication, and an unguessable-looking room label alone is not access control. These scripts and server files are future implementation requirements, not runnable code included with this bible.
+
+Test two browsers locally, then four devices on LAN, then an internet session with 100ms simulated round-trip latency, 30ms jitter, and brief disconnections. A 1% packet-loss test still matters even though WebSocket is reliable: retransmission creates stalls and head-of-line delay. Record p95 tick time, event-loop lag, snapshot bytes, corrections per minute, and reconnect success. Admission stops before overload, instead of accepting players into a failing process.
+
+### Phase three: shared harbors and horizontal scale
+
+Persistent Wickharbor social spaces need accounts, moderation, privacy, server-owned saves, backups, and abuse handling before a public launch. A gateway authenticates sessions; a matchmaker allocates bounded social instances and expedition workers. A world directory tracks which worker owns a room. Durable profiles live in a database, while transient presence can use a shared adapter or cache. A Socket.IO adapter relays messages; it does not move a running combat simulation or eliminate the need for room ownership.
+
+Start social instances around a measured cap such as 32 visitors, then benchmark. Room workers remain small; zones partition interest so a player receives nearby entities rather than the whole population. Transfer between workers at a doorway uses a signed handoff and one writer for inventory. Persistent transactions require idempotency and a clear failure rollback. Separate public social chapter state from private ending choices.
+
+A Node process has finite CPU, memory, bandwidth, and event-loop time. Multiple processes and machines add independent rooms; they do not make one boss fight infinitely scalable. “Unlimited players” can honestly mean no fixed global account ceiling in the design, with capacity purchased and added sideways. It cannot mean unlimited concurrent nearby actors, zero operations cost, or a promise of thousands per process. BrowserQuest is a useful HTML5/JavaScript and Node precedent with configurable worlds, but its historical runtime and dependencies are not a modern deployment template or capacity benchmark.
+
+## 12. Scope, milestones, and the someday ladder
+
+The vertical slice is one compact village hub, one Undercroft biome with twelve generated rooms, four Drowned roles, one Sexton boss, four starting weapon actions across three physical classes, two current spells, six relics, one reaction, eight material slots, a sixteen-minute tide, all three run outcomes, one restored bell, two earnable ranks, furnace/anvil/alchemy interactions, local saves, keyboard-only parity, and the first narrative sequence. It is solo only. The village may use a few promoted HOLD pieces, not an entire township of unfinished services.
+
+| Version | Delivery | Acceptance gate |
+|---|---|---|
+| v0.1a | Movement, feet collision, aim, camera | Stable speed at differing render rates; no diagonal boost |
+| v0.1b | Crush/Pierce/Slice, dodge, training enemy | Debug timing matches data; all armor matchups testable |
+| v0.2a | Four Drowned roles and hazards | Each attack readable without sound or color |
+| v0.2b | Room graph, seeds, exits, tide | Ten thousand valid seeds; all three outcomes settle once |
+| v0.3a | Sexton and full expedition | Blind testers can identify a punish window and escape |
+| v0.3b | Village, first bell, crafting, saves | Reload cannot duplicate materials; return dialogue accurate |
+| v0.4a | Art cohesion, sound, access, performance | Missing shipping art replaced; budget measured on target laptop |
+| v0.4b | Closed solo slice review | Typical success lands in twelve-to-sixteen-minute target |
+| v0.5a | Sluiceward, Keld, Air/Earth | Negotiation and second-biome roles tested; no scope leakage |
+| v0.6a | Self-hosted authoritative co-op | Four-player LAN and impaired-network tests pass |
+| v0.6b | Tunnel, reconnect, group extraction | Friends join through one URL; no duplicated settlement |
+| v0.7a | Cathedral chapter and ending prototypes | Narrative consequences coherent across all paths |
+| v0.8a | Full campaign content lock | Entire story playable solo before online social expansion |
+| v0.9a | Reliability and accessibility review | Migration, browser, input, and recovery matrix passes |
+| v1.0a | Finished bounded game | License clearance, release review, and complete loop verified |
+
+Milestones are gates, not calendar promises. Relic tests each gate from a fresh save and gives a short feel verdict; Ember records failures and fixes the smallest cause before adding systems. Keep a reference command replay for movement, one room, and the boss. A feature cannot pass solely because its code compiles or a screenshot looks convincing.
+
+The someday ladder preserves ambitions without smuggling them into the slice. First come extra routes, challenge modifiers, more bells, controller support, and narrative depth. Next come optional companions and cosmetic pets with their own AI and art budgets. Then come persistent social harbors, player homes, guild-like crews, shared workshops, and a carefully bounded trading economy. Character ancestries or playable Keld identities require original body art and a new cultural design; they are not selectable “races” disguised by recoloring Body_A.
+
+Only after cooperative combat is robust should consensual duels, PvP arenas, or competitive seasons be considered. Large raids, very-large-scale battles, territory control, breeding pets, farming, housing neighborhoods, global ecology, public events, voice chat, user-generated maps, and a shared ocean all sit on the final feasibility tier. Each needs an explicit business and operations case. No seasonal battle pass, paid power, monetized retry, or premium ending is part of this proposal. Funding decisions need separate approval; this document makes no storefront promise.
+
+## 13. Open design questions with proposed answers
+
+**Does the clock punish exploration too much?** Proposed baseline is a generous fixed budget, visible route estimates, an early lift, and optional Story extension. Measure how often players abandon reading or avoid every branch. If that happens, shorten traversal or move lore reading into the Almanac at home before increasing pressure.
+
+**Can a recovered great bell fit the fiction and inventory?** Recover clappers and cylinders, restore great installations in place, and use a marked salvage follow-up for portable bells. The player carries a believable objective, while the village receives a visible consequence. Do not animate a person lifting a cathedral bell because a generic pickup exists.
+
+**Does death cheapen the cost of the sea?** The bond saves Bellringers only; materials, time, and civilian stakes remain real. It should not permanently injure the player or require grinding off a penalty. Dialogue can acknowledge exhaustion without guilt. The ending that ends the bond receives a final safe return and a clearly separated replay mode.
+
+**Why not ring every bell immediately?** Local settlement and centralized captivity can coexist: a correct local service calms a chamber while the old network diverts its voices. The act-two discovery changes understanding, not the truth of every earlier kindness. Show evidence from multiple people rather than making one villain lecture the only source.
+
+**Is the third ending automatically best?** No. Distributed contact costs predictability and demands shared governance; some dead refuse it and some living dislike uncertainty. It offers a different responsibility, not a reward for collecting every trinket. All three endings need sympathetic epilogues and visible costs.
+
+**Can the tide geometry trap someone unfairly?** Mandatory exits stay open until the declared deadline, and optional closures retain outward traversal. Validate route distance and advertise closing alcoves. If a seeded layout cannot satisfy this, reject it. Do not solve a generator bug by calling it roguelike cruelty.
+
+**How much permanent power is acceptable?** Begin with lateral patterns, recipes, convenience, one capped comfort upgrade, and no repeat-kill rank farming. Compare fresh-profile and progressed-profile boss results. If upgrades dominate pattern knowledge, reduce numbers before adding harder difficulty labels.
+
+**Are all apparent visual resources licensed for public delivery?** Not established. Keep a per-pack provenance record and obtain the exact downloaded license and any raw-file redistribution permission before release. Game-use permission is not source-asset hosting permission. No public shipping is approved while those rights remain unresolved.
+
+**How is a shared harbor compatible with private endings?** A public harbor uses a declared campaign chapter; private story instances own irreversible choices. Do not merge incompatible endings into one canonical global event without a new design. Online persistence also requires deciding whether cosmetic account progress crosses private campaigns.
+
+**What would stop multiplayer expansion?** Repeated failed latency tests, inability to operate moderation and backups, or an incomplete solo loop. The correct response is to keep the finished solo game, not disguise infrastructure risk as a content delay. A two-person studio may rationally stop at excellent four-person expeditions.
+
+## 14. Credits and asset-rights register
+
+**Designed and Made by Relic & Ember Studios. We wake worlds.**
+
+Relic: design direction, priorities, playtesting, and final creative judgment. Ember: original world and writing, systems specification, implementation support, and technical research. Reference games are research influences, not source material for characters, dialogue, art, or code. All BELLWAKE names and fiction here are original proposals; title availability and legal clearance have not been verified.
+
+| Creator / pack | Intended use | License summary and unresolved boundary |
+|---|---|---|
+| anokolisa / original collection | Body_A; Orc and Skeleton crews; Bone/Hands/Wood; dungeon and selected HOLD village/station pieces | Supplied audit reports commercial use and editing allowed from owner context, no asset resale; no pack-specific embedded license established. Obtain original purchase/download terms. Public raw hosting is not automatically covered. |
+| szadiart / Rogue Fantasy Catacombs | Undercroft rooms, walls, doors, stairs, coffins, candles, torches, spikes | Audit records commercial/edit permissions and restrictions on resale; flattened import leaves exact license-to-pack mapping uncertain. Retain both bundled texts and recover original provenance. |
+| craftpix / Free Animated Magic Book | Almanac, four current themes, frames, selected icons | Audit cites official freebie terms allowing personal/commercial game use and modification; usable art redistribution and source resale restricted, including PNG/JPG. Attribution appreciated. Raw public redistribution remains unresolved. |
+| Clockwork Raven / Free Raven Fantasy Icons | One reviewed sixteen-pixel atlas for items and interface symbols | Audit reports commercial modification allowed and credit optional; standalone asset distribution needs permission. Exact free-download terms and public raw hosting need confirmation. |
+
+The extra medieval UI pack stays outside scope because its creator provenance is unresolved and its bundled terms restrict as-is redistribution. Font preview references are not font licenses. The audit is a supplied nine-page review dated November 24, 2026, not a new legal clearance performed for this bible. No art is embedded in the delivered documents, and nothing should ship publicly until rights are resolved. Organizing a file under a folder called vault does not make it private or remove historical public copies.
+
+## Appendix A. Research register and evidentiary limits
+
+Sources inspected November 24, 2026. Descriptions support the observations stated in Section 2; tuning values, enemy numbers, tide budgets, network rates, and project layout are original recommendations, not claims copied from those sources. Store descriptions do not expose proprietary implementation details. A wrong store redirect and unavailable guessed pages were discarded, not used as evidence.
+
+- Hades, official game page: https://www.supergiantgames.com/games/hades/ — action and persistent progressing story; basis for between-return narrative.
+- Dead Cells, official site: https://dead-cells.com/ — pattern-based enemies, alternate paths, permadeath, repeated learning.
+- The Binding of Isaac: Rebirth, developer/publisher store description: https://store.steampowered.com/app/250900/The_Binding_of_Isaac_Rebirth/ — randomized action and ability-changing treasures.
+- Enter the Gungeon, store description: https://store.steampowered.com/app/311690/Enter_the_Gungeon/ — dodge-roll dungeon combat; no exact roll timing imported.
+- Nintendo, Echoes of Wisdom: https://www.nintendo.com/us/store/products/the-legend-of-zelda-echoes-of-wisdom-switch/ — creative spatial combinations; combat-chess application is our inference.
+- Soul Knight, official ChillyRoom app listing: https://play.google.com/store/apps/details?id=com.ChillyRoom.DungeonShooter — top-down action, randomized dungeons, and two-to-four-player cooperation.
+- Vampire Survivors, official page: https://poncle.games/vampire-survivors — survival, gold, and later upgrades.
+- Moonlighter, official publisher store description: https://store.steampowered.com/app/606150/Moonlighter/ — adventurer/shopkeeper duality; harbor interpretation is original.
+- Children of Morta, publisher page: https://11bitstudios.com/games/children-of-morta/ — story-driven action and family stakes.
+- Basic BSP generation: https://www.roguebasin.com/index.php/Basic_BSP_Dungeon_generation — partition-based floor construction reference.
+- Wave Function Collapse, project documentation: https://github.com/mxgmn/WaveFunctionCollapse — local-pattern generation reference, not automatic mission design.
+- Phaser loader documentation: https://docs.phaser.io/api-documentation/class/loader-loaderplugin — Aseprite PNG/JSON and Tiled JSON loading; pin version before implementation.
+- Phaser tilemap API: https://docs.phaser.io/api-documentation/class/tilemaps-tilemap — map support.
+- Phaser Arcade Physics: https://docs.phaser.io/phaser/concepts/physics/arcade — lightweight rectangles/circles for simple top-down use.
+- Tiled export documentation: https://doc.mapeditor.org/en/stable/manual/export-generic/ — authoring/export pipeline reference.
+- PixiJS introduction: https://pixijs.com/8.x/guides/getting-started/intro — rendering-focused alternative.
+- KAPLAY: https://kaplayjs.com/ — approachable game-library alternative.
+- Socket.IO introduction: https://socket.io/docs/v4/ — event-based bidirectional transport and transport fallback.
+- Socket.IO rooms: https://socket.io/docs/v4/rooms/ — server-side channels for subsets of clients, not simulation workers.
+- ws project: https://github.com/websockets/ws — Node WebSocket implementation; browser uses native WebSocket when choosing ws.
+- Gabriel Gambetta, authority: https://www.gabrielgambetta.com/client-server-game-architecture.html
+- Gabriel Gambetta, prediction/reconciliation: https://www.gabrielgambetta.com/client-side-prediction-server-reconciliation.html
+- Gabriel Gambetta, interpolation: https://www.gabrielgambetta.com/entity-interpolation.html
+- BrowserQuest: https://github.com/mozilla/BrowserQuest and https://github.com/mozilla/BrowserQuest/blob/master/server/README.md — historical HTML5/JavaScript experiment with Node server and configurable worlds. Old dependencies are not endorsed.
+
+No exact competitor median run time, guaranteed Node player capacity, deployed multiplayer benchmark, tested browser performance, font permission, title clearance, or full raw-art redistribution grant was verified. Those remain explicit validation work, not hidden assumptions. The supplied asset inventory is the private-chat source for asset and license summaries and has no public document URL attached here.
+
+## Appendix B. Implementation acceptance checklist
+
+A build is ready for slice review when movement is fixed-step, all physical classes follow the matrix, dodge immunity matches debug ticks, and every enemy attack has a visible answer. The generator must preserve a reachable exit, separate random streams, and reproducible versioned seeds. The tide must show its deadline and distinguish safe extraction, combat death, and tide capture. Settlement must survive a refresh without duplicate rewards.
+
+The village must visibly change after the first restored bell, crafting must consume exactly the previewed materials, and dialogue must describe the outcome that actually occurred. Both mouse and keyboard-only controls must complete the loop. Reduced effects must preserve danger information. The book's readable text layer must expose equipment, currents, chart, and names. No nonfunctional online, housing, or seasonal buttons may imply finished systems.
+
+The art manifest must include only selected exports with provenance, no unreviewed font binaries, and no claim that missing enemy attacks are already supplied. Audio warnings must have visual equivalents. Performance targets require measurements, not optimism. Online implementation, when separately approved, must pass four-player LAN, latency, reconnect, room-ownership, and idempotent-settlement tests before a public shared space is considered.
+
+The final creative test is simpler: after one failed Ebb, the player should understand one thing they can do better, care about one person in Wickharbor, and want to hear what the next bell has to say.
+
+**Designed and Made by Relic & Ember Studios. We wake worlds.**
