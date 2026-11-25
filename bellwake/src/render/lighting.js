@@ -11,18 +11,6 @@
 //
 // Depths: overlay 800, glows 801, both above the world (props top out
 // around 700) and below the area title at 900.
-// The mood layer. One ambient darkness overlay sits over the whole
-// room (def.ambient, 0..1: tavern 0.45, street 0.6, Undercroft 0.5),
-// and additive radial glows punch warmth back through it. Lights
-// come from two places:
-//   - def.lights, the authored list: { tx, ty, r, color, flicker }
-//   - room.torches(), auto-lit so the Undercroft's T tiles glow
-//     without anyone hand-placing a light
-// Water shimmer moved to tileart.js (it belongs to the water); this
-// file is darkness and warmth, nothing else.
-//
-// Depths: overlay 800, glows 801, both above the world (props top out
-// around 700) and below the area title at 900.
 
 import { TILE } from '../sim/room.js';
 
