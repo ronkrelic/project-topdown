@@ -1,4 +1,4 @@
-// BELLWAKE v0.01a - sim/room.js
+// BELLWAKE v0.02a - sim/room.js
 // Engine-agnostic room model. No Phaser here, ever.
 export const TILE = 16;
 
@@ -44,6 +44,15 @@ export class Room {
     for (let ty = 0; ty < this.height; ty++)
       for (let tx = 0; tx < this.width; tx++)
         if (this.rows[ty][tx] === 'W') found.push({ tx, ty });
+    return found;
+  }
+
+  // All door tiles, for the sim (open state) and the renderer.
+  doors() {
+    const found = [];
+    for (let ty = 0; ty < this.height; ty++)
+      for (let tx = 0; tx < this.width; tx++)
+        if (this.rows[ty][tx] === 'D') found.push({ tx, ty });
     return found;
   }
 

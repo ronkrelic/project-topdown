@@ -1,4 +1,4 @@
-// BELLWAKE v0.01a - sim/player.js
+// BELLWAKE v0.02a - sim/player.js
 // The Bellringer. Pure state: no rendering, no input.
 export class Player {
   constructor(x, y) {
@@ -9,6 +9,7 @@ export class Player {
     this.halfH = 4;
     this.intentX = 0;  // -1..1, set by input each frame
     this.intentY = 0;
+    this.use = false;  // "use" pressed: doors now, all interaction later
     this.moving = false;
     this.facing = 'down';
   }
@@ -16,5 +17,9 @@ export class Player {
   setIntent(dx, dy) {
     this.intentX = dx;
     this.intentY = dy;
+  }
+
+  setUse(down) {
+    this.use = down;
   }
 }
