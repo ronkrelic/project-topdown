@@ -1,48 +1,107 @@
-// BELLWAKE v0.01a - render/lighting.js
-// All mood, zero assets: torch flicker + tide shimmer, drawn in code.
+// BELLWAKE v0.03a - render/lighting.js
+// The mood layer. One ambient darkness overlay sits over the whole
+// room (def.ambient, 0..1: tavern 0.45, street 0.6, Undercroft 0.5),
+// and additive radial glows punch warmth back through it. Lights
+// come from two places:
+//   - def.lights, the authored list: { tx, ty, r, color, flicker }
+//   - room.torches(), auto-lit so the Undercroft's T tiles glow
+//     without anyone hand-placing a light
+// Water shimmer moved to tileart.js (it belongs to the water); this
+// file is darkness and warmth, nothing else.
+//
+// Depths: overlay 800, glows 801, both above the world (props top out
+// around 700) and below the area title at 900.
+
 import { TILE } from '../sim/room.js';
+
+const OVERLAY_DEPTH = 800;
+const GLOW_DEPTH = 801;
+const GLOW_KEY = 'boba-glow';
+
+// auto-light recipe for torch tiles
+const TORCH_LIGHT = { r: 40, color: 0xffa050, flicker: true };
+
+// base alpha for every glow; flicker swings around it
+const GLOW_ALPHA = 0.32;
+
+function ensureGlowTexture(scene) {
+  if (scene.textures.exists(GLOW_KEY)) return;
+  const size = 256;
+  const tex = scene.textures.createCanvas(GLOW_KEY, size, size);
+  if (!tex) return;
+  const ctx = tex.getContext();
+  const grad = ctx.createRadialGradient(
+    size / 2, size / 2, 0,
+    size / 2, size / 2, size / 2);
+  grad.addColorStop(0, 'rgba(255,255,255,1)');
+  grad.addColorStop(0.4, 'rgba(255,255,255,0.4)');
+  grad.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, size, size);
+  tex.refresh();
+}
 
 export class Lighting {
   constructor(scene, room) {
+    this.scene = scene;
     this.room = room;
-    this.torches = room.torches();
-    this.water = room.water();
-    this.w = room.width * TILE;
-    this.h = room.height * TILE;
-    this.dark = scene.add.graphics().setDepth(4);
-    this.glow = scene.add.graphics().setDepth(5).setBlendMode(Phaser.BlendModes.ADD);
+    this.objs = [];
+    this.tweened = [];
+
+    ensureGlowTexture(scene);
+
+    const W = room.width * TILE;
+    const H = room.height * TILE;
+    const ambient = typeof room.def.ambient === 'number' ? room.def.ambient : 0.5;
+
+    // the darkness everything sits under
+    this.push(scene.add.rectangle(W / 2, H / 2, W, H, 0x000000)
+      .setDepth(OVERLAY_DEPTH)
+      .setAlpha(ambient));
+
+    // authored lights, then torch tiles lit automatically
+    const lights = (room.def.lights || []).slice();
+    for (const t of room.torches()) {
+      lights.push({ tx: t.tx, ty: t.ty, ...TORCH_LIGHT });
+    }
+    lights.forEach((l, i) => this.addLight(l, i));
   }
 
-  update(t) {
-    // Darkness: the Undercroft is a candlelit place.
-    this.dark.clear();
-    this.dark.fillStyle(0x05070c, 0.42);
-    this.dark.fillRect(0, 0, this.w, this.h);
+  push(o) {
+    this.objs.push(o);
+    return o;
+  }
 
-    this.glow.clear();
+  addLight(l, i) {
+    const { scene } = this;
+    const x = l.tx * TILE + TILE / 2;
+    const y = l.ty * TILE + TILE / 2;
+    const glow = scene.add.image(x, y, GLOW_KEY)
+      .setDisplaySize(l.r * 2, l.r * 2)
+      .setTint(l.color || 0xffd9a0)
+      .setAlpha(GLOW_ALPHA)
+      .setBlendMode(Phaser.BlendModes.ADD)
+      .setDepth(GLOW_DEPTH);
+    this.push(glow);
+    if (!l.flicker) return;
+    // each flicker gets its own tempo so the room never pulses in
+    // lockstep; hearth and lanterns breathe out of phase
+    this.tweened.push(glow);
+    scene.tweens.add({
+      targets: glow,
+      alpha: { from: GLOW_ALPHA * 0.75, to: GLOW_ALPHA * 1.2 },
+      duration: 500 + (i % 5) * 130,
+      yoyo: true,
+      repeat: -1,
+      delay: (i % 3) * 200,
+      ease: 'Sine.easeInOut'
+    });
+  }
 
-    // Torch flicker: layered sin waves keep it organic but stable.
-    for (const { tx, ty } of this.torches) {
-      const cx = tx * TILE + TILE / 2;
-      const cy = ty * TILE + TILE - 2;
-      const flicker =
-        0.75 +
-        0.2 * Math.sin(t * 0.011 + tx * 1.7) +
-        0.08 * Math.sin(t * 0.037 + ty * 2.3);
-      const r = 30 + 14 * flicker;
-      this.glow.fillStyle(0xff9a3c, 0.10);
-      this.glow.fillCircle(cx, cy, r);
-      this.glow.fillStyle(0xffb545, 0.12);
-      this.glow.fillCircle(cx, cy, r * 0.62);
-      this.glow.fillStyle(0xffd98a, 0.16);
-      this.glow.fillCircle(cx, cy, r * 0.34);
-    }
-
-    // Water shimmer: each seepage tile breathes on its own phase.
-    for (const { tx, ty } of this.water) {
-      const a = 0.05 + 0.07 * (0.5 + 0.5 * Math.sin(t * 0.0028 + tx * 0.9 + ty * 0.5));
-      this.glow.fillStyle(0x4fd6ff, a);
-      this.glow.fillRect(tx * TILE, ty * TILE, TILE, TILE);
-    }
+  destroy() {
+    for (const o of this.tweened) this.scene.tweens.killTweensOf(o);
+    for (const o of this.objs) o.destroy();
+    this.objs.length = 0;
+    this.tweened.length = 0;
   }
 }

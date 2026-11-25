@@ -1,23 +1,20 @@
-// BELLWAKE v0.01a - bootstrap.
-// Wires the engine-agnostic simulation to the Phaser renderer (bible SS11).
-import { Room, TILE } from './sim/room.js';
-import { Player } from './sim/player.js';
-import { Sim } from './sim/sim.js';
-import { BellwakeScene } from './render/scene.js';
+// BELLWAKE v0.03a - main.js
+// Boot file. The canvas is fixed at 480x272: every room in the world
+// is 30x17 tiles (bible SS8), so the buffer never resizes. The scene
+// snaps whole-integer zoom to the window (pixels.js does the math).
+
 import { pixelGameConfig } from './render/pixels.js';
-import { UNDERCROFT_TEST } from './data/rooms/undercroft-test.js';
+import { SceneMain } from './render/scene.js';
 
-const room = new Room(UNDERCROFT_TEST);
-const spawn = room.spawnPoint();
-const player = new Player(spawn.x, spawn.y);
-const sim = new Sim(room, player);
-
-new Phaser.Game({
-  type: Phaser.AUTO,
-  parent: 'game',
-  backgroundColor: '#05070c',
-  width: room.width * TILE,
-  height: room.height * TILE,
-  scene: new BellwakeScene({ room, sim }),
-  ...pixelGameConfig()
-});
+new Phaser.Game(
+  Object.assign(
+    {
+      type: Phaser.AUTO,
+      width: 480,
+      height: 272,
+      backgroundColor: '#07090c',
+      scene: [SceneMain]
+    },
+    pixelGameConfig()
+  )
+);
