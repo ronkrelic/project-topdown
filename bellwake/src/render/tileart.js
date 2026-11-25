@@ -4,6 +4,20 @@
 // promise (wall bands, buildings, doors, water, props) is drawn here;
 // lighting.js and areatitle.js layer on top of it.
 //
+// HOTFIX (floor bugs, v0.03a): plank swatch 80x80 -> 80x64 (its
+// bottom row held two empty sheet cells that rendered as black
+// tavern floor tiles) and water variants moved from the y=80 row
+// (three empty cells -> black squares in the harbor) to the clean
+// y=96 row.
+//
+// STREET/DOORWAY PASS (v0.03a): sheet doors no longer sit over a
+// flat black opening - their own masonry surrounds do the work, and
+// door-stone is recropped to 48x50 so the sill's bottom row
+// survives. Alley slots are dressed as shadowed sidewalls instead
+// of raw black, row 0 gets a real roof band behind the eave, and
+// the lantern crop is tightened to the lamp itself (the old frame
+// hauled ~10px of empty sheet along).
+//
 // Sheets load as PLAIN IMAGES on purpose: the JSONs beside nine of
 // them are stale from the padded-export overwrite, so every frame
 // below is sliced by hand in SPEC. (Player atlases are the exception,
@@ -11,7 +25,7 @@
 //
 // Depth plan (lighting starts at 800, titles at 900):
 //   0 floors            1 water + shoreline      2 water glints
-//   3 alley slots       4 facades, eave, legacy blocks
+//   3 alley sidewalls   4 facades, roof band, eave, legacy blocks
 //   5 wall bands, door openings                   6 door leaves
 //   50 flat props (rugs and other floor dressing)
 //   100 + bottom-y     everything that y-sorts: props, the player
@@ -62,7 +76,10 @@ const SPEC = {
   'chandelier-simple':    { s: 'intprops', x: 208, y: 64,  w: 32, h: 32 },
   'chandelier-elaborate': { s: 'intprops', x: 240, y: 64,  w: 32, h: 32 },
   'hearth':               { s: 'intprops', x: 272, y: 48,  w: 48, h: 96 },
-  'door-stone':           { s: 'intprops', x: 272, y: 144, w: 48, h: 48 },
+  // 50 tall, not 48: the stone door's sill runs two rows past the
+  // old crop, and clipping it made the door look cut short at the
+  // floor
+  'door-stone':           { s: 'intprops', x: 272, y: 144, w: 48, h: 50 },
   'door-blue':            { s: 'intprops', x: 224, y: 208, w: 48, h: 48 },
   'rug-green':            { s: 'intprops', x: 336, y: 336, w: 48, h: 48 },
   'rug-olive':            { s: 'intprops', x: 384, y: 336, w: 48, h: 48 },
@@ -91,10 +108,14 @@ const SPEC = {
   'facade-c':             { s: 'bldgwalls', x: 288, y: 192, w: 96, h: 48 },
   'facade-d':             { s: 'bldgwalls', x: 384, y: 192, w: 96, h: 48 },
   'facade-e':             { s: 'bldgwalls', x: 480, y: 192, w: 96, h: 48 },
+  // left half of the vertical-plank panel: the alley sidewall
+  'alley-boards':         { s: 'bldgwalls', x: 192, y: 192, w: 48, h: 48 },
 
   // Roofs
-  'eave-trim':            { s: 'roofs', x: 0, y: 240, w: 48, h: 16 },
-  'eave-toothed':         { s: 'roofs', x: 0, y: 256, w: 48, h: 16 },
+  'eave-trim':            { s: 'roofs', x: 0,  y: 240, w: 48, h: 16 },
+  'eave-toothed':         { s: 'roofs', x: 0,  y: 256, w: 48, h: 16 },
+  // roof surface that fills row 0 behind the eave
+  'roof-band':            { s: 'roofs', x: 32, y: 192, w: 64, h: 16 },
 
   // Buildings Props
   'window-a':             { s: 'bldgprops', x: 64,  y: 64, w: 32, h: 32 },
@@ -105,8 +126,12 @@ const SPEC = {
   'fence-span':           { s: 'bldgprops', x: 16,  y: 176, w: 48, h: 16 },
 
   // Furniture
+  // lamp-post is the bare post + arm; the lantern hangs separately
+  // (frame below), off the arm's tip, placed in the room defs
   'lamp-post':            { s: 'furniture', x: 144, y: 448, w: 32, h: 48 },
-  'lantern-hanging':      { s: 'furniture', x: 176, y: 448, w: 16, h: 32 },
+  // the lamp itself, bracket included - old crop carried ~10 empty
+  // rows below it, which shrank and floated the lantern
+  'lantern-hanging':      { s: 'furniture', x: 175, y: 450, w: 16, h: 22 },
   'crate-open':           { s: 'furniture', x: 720, y: 64,  w: 16, h: 32 },
   'crate-slatted':        { s: 'furniture', x: 736, y: 64,  w: 16, h: 32 },
 
@@ -116,10 +141,13 @@ const SPEC = {
   'rock-cluster':         { s: 'vegetation', x: 224, y: 400, w: 48, h: 32 }
 };
 
-// Floor styles: an 80x80 (or 48x32) swatch per style, sliced into
-// 16x16 variants and hash-scattered so floors don't look tiled.
+// Floor styles: a swatch per style, sliced into 16x16 variants and
+// hash-scattered so floors don't look tiled. Plank is 80x64, not
+// 80x80: the region's bottom row has two empty cells on the sheet
+// ((0,640) and (64,640)) that hashed in as black tiles on the tavern
+// floor, so the swatch stops one row short of them.
 const FLOOR_STYLES = {
-  plank: { sheet: 'intwalls', x: 0,   y: 576, w: 80, h: 80 },
+  plank: { sheet: 'intwalls', x: 0,   y: 576, w: 80, h: 64 },
   stone: { sheet: 'floors',   x: 96,  y: 160, w: 48, h: 32 },
   grass: { sheet: 'floors',   x: 16,  y: 160, w: 48, h: 32 },
   earth: { sheet: 'floors',   x: 176, y: 160, w: 48, h: 32 }
@@ -144,6 +172,11 @@ const LEGACY = {
   opening: 0x07090c,
   flame: 0xffa04a
 };
+
+// dusk shadow on the alley sidewalls so the slots read as turned
+// away from the light, not as more frontage. lighten toward
+// 0xffffff if they read too gloomy
+const ALLEY_TINT = 0x9aa1a9;
 
 // ------------------------------------------------- frame registration
 
@@ -175,9 +208,11 @@ function ensureFrames(scene) {
   for (let i = 0; i < 6; i++) {
     addFrame(scene, 'intwalls', `int-wall-tex-${i}`, 384 + i * TILE, 48, TILE, TILE);
   }
-  // textured water patches
+  // textured water patches - sliced from the y=96 row; the y=80 row
+  // has three empty cells (columns 0, 4 and 5) that showed up as
+  // black squares scattered across the harbor
   for (let i = 0; i < 8; i++) {
-    addFrame(scene, 'water', `water-${i}`, i * TILE, 80, TILE, TILE);
+    addFrame(scene, 'water', `water-${i}`, i * TILE, 96, TILE, TILE);
   }
   for (const [cell, [x, y]] of Object.entries(SHORE_CELLS)) {
     addFrame(scene, 'water', `shore-${cell}`, x, y, TILE, TILE);
@@ -259,7 +294,7 @@ export class TileArt {
         const style = entry.floor || '';
         if (FLOOR_STYLES[style]) {
           const v = (tx * 7 + ty * 13) % FLOOR_VARIANTS[style];
-          this.push(scene.add.image(tx * TILE + 8, ty * TILE + 8, `fl-${style}-${v}`).setDepth(0));
+          this.push(scene.add.image(tx * TILE + 8, ty * TILE + 8, FLOOR_STYLES[style].sheet, `fl-${style}-${v}`).setDepth(0));
         } else if (this.legacy) {
           this.push(scene.add.rectangle(tx * TILE + 8, ty * TILE + 8, TILE, TILE, LEGACY.floor).setDepth(0));
         }
@@ -275,7 +310,7 @@ export class TileArt {
     for (const { tx, ty } of room.water()) {
       if (spec) {
         const v = (tx * 5 + ty * 11) % 8;
-        this.push(scene.add.image(tx * TILE + 8, ty * TILE + 8, `water-${v}`).setDepth(1));
+        this.push(scene.add.image(tx * TILE + 8, ty * TILE + 8, 'water', `water-${v}`).setDepth(1));
       } else {
         this.push(scene.add.rectangle(tx * TILE + 8, ty * TILE + 8, TILE, TILE, LEGACY.water).setDepth(1));
       }
@@ -284,7 +319,7 @@ export class TileArt {
     for (let ty = 0; ty < room.height; ty++) {
       for (let tx = 0; tx < room.width; tx++) {
         if (!room.entryAt(tx, ty).shore) continue;
-        this.push(scene.add.image(tx * TILE + 8, ty * TILE + 8, `shore-${this.shoreCell(tx, ty)}`).setDepth(1));
+        this.push(scene.add.image(tx * TILE + 8, ty * TILE + 8, 'water', `shore-${this.shoreCell(tx, ty)}`).setDepth(1));
       }
     }
     if (spec && spec.shimmer && room.water().length) {
@@ -339,24 +374,24 @@ export class TileArt {
     const W = room.width * TILE, H = room.height * TILE;
     // north band: 2 rows of cap, then face rows (ours is cap 2 + face 1)
     for (let x = 0; x < W; x += 96) {
-      this.push(scene.add.image(x, 0, w.cap).setOrigin(0, 0).setDepth(5));
+      this.push(scene.add.image(x, 0, 'intwalls', w.cap).setOrigin(0, 0).setDepth(5));
     }
     for (let r = 0; r < Math.max(0, w.north - 2); r++) {
       for (let x = 0; x < W; x += 96) {
-        this.push(scene.add.image(x, 32 + r * TILE, w.face).setOrigin(0, 0).setDepth(5));
+        this.push(scene.add.image(x, 32 + r * TILE, 'intwalls', w.face).setOrigin(0, 0).setDepth(5));
       }
     }
     // south band: the face flipped, along the bottom edge
     if (w.south) {
       for (let x = 0; x < W; x += 96) {
-        this.push(scene.add.image(x, H - w.south * TILE, w.face).setOrigin(0, 0).setFlipY(true).setDepth(5));
+        this.push(scene.add.image(x, H - w.south * TILE, 'intwalls', w.face).setOrigin(0, 0).setFlipY(true).setDepth(5));
       }
     }
     // side walls: texture crops between the bands
     for (let ty = w.north; ty < room.height - w.south; ty++) {
       for (const tx of [0, room.width - 1]) {
         const v = (tx * 3 + ty * 7) % 6;
-        this.push(scene.add.image(tx * TILE + 8, ty * TILE + 8, `int-wall-tex-${v}`).setDepth(5));
+        this.push(scene.add.image(tx * TILE + 8, ty * TILE + 8, 'intwalls', `int-wall-tex-${v}`).setDepth(5));
       }
     }
   }
@@ -366,23 +401,31 @@ export class TileArt {
   drawBuildings() {
     const { room, scene } = this;
     const b = room.def.buildings;
-    // alleys first: dark slots the facades never cover
+    // alleys first: the slots between facades, dressed as shadowed
+    // building sidewalls instead of flat black holes
     for (const [c0, c1] of b.alleys) {
-      const cw = (c1 - c0 + 1) * TILE;
-      this.push(scene.add.rectangle((c0 * TILE) + cw / 2, 32, cw, 4 * TILE, 0x0a0c10).setDepth(3));
+      for (let x = c0 * TILE; x <= c1 * TILE; x += 48) {
+        this.push(scene.add.image(x, TILE, 'bldgwalls', 'alley-boards')
+          .setOrigin(0, 0).setDepth(3).setTint(ALLEY_TINT));
+      }
     }
     // facades: 96x48 strips tiled across each block, rows 1-3
     for (const blk of b.blocks) {
       for (let x = blk.cols[0] * TILE; x <= blk.cols[1] * TILE; x += 96) {
-        this.push(scene.add.image(x, TILE, blk.facade).setOrigin(0, 0).setDepth(4));
+        this.push(scene.add.image(x, TILE, SPEC[blk.facade].s, blk.facade).setOrigin(0, 0).setDepth(4));
       }
+    }
+    // the roof surface behind the eave: row 0 gets real roof so the
+    // strip above the facades isn't raw background
+    for (let x = 0; x < room.width * TILE; x += 64) {
+      this.push(scene.add.image(x, 0, 'roofs', 'roof-band').setOrigin(0, 0).setDepth(4));
     }
     // the roofline: trim with toothed eave over row 0
     for (let x = 0; x < room.width * TILE; x += 48) {
-      this.push(scene.add.image(x, 0, b.eave.trim).setOrigin(0, 0).setDepth(4));
+      this.push(scene.add.image(x, 0, SPEC[b.eave.trim].s, b.eave.trim).setOrigin(0, 0).setDepth(4));
     }
     for (let x = 0; x < room.width * TILE; x += 48) {
-      this.push(scene.add.image(x, 0, b.eave.teeth).setOrigin(0, 0).setDepth(4));
+      this.push(scene.add.image(x, 0, SPEC[b.eave.teeth].s, b.eave.teeth).setOrigin(0, 0).setDepth(4));
     }
   }
 
@@ -417,15 +460,24 @@ export class TileArt {
       const x = minX * TILE;
       const bot = (maxY + 1) * TILE;
       const gw = (maxX - minX + 1) * TILE;
-      // our doors are 3 tiles wide and the frames are 48x48, so the
-      // leaf covers the doorway and then some upward (the recess)
-      const gh = want ? 48 : TILE;
-      this.push(scene.add.rectangle(x + gw / 2, bot - gh / 2, gw, gh, LEGACY.opening).setDepth(5));
-      const leaf = want
-        ? scene.add.image(x, bot, want).setOrigin(0, 1).setDepth(6)
-        : scene.add.rectangle(x + gw / 2, bot - gh / 2, gw, gh, LEGACY.leaf).setDepth(6);
-      this.push(leaf);
-      this.doorGroups.push({ tiles: g, leaf });
+      if (want) {
+        // Sheet doors carry their own masonry surround, sill and
+        // shadows, and their frames stand taller than the doorway's
+        // tile span (door-stone is 48x50). No flat black behind
+        // them: the wall band or facade shows through the sprite's
+        // transparent side margins, so the door sits IN the wall
+        // instead of floating over a void.
+        const leaf = scene.add.image(x, bot, SPEC[want].s, want)
+          .setOrigin(0, 1).setDepth(6);
+        this.push(leaf);
+        this.doorGroups.push({ tiles: g, leaf });
+      } else {
+        // legacy rooms (the Undercroft) keep the flat-color pair
+        this.push(scene.add.rectangle(x + gw / 2, bot - TILE / 2, gw, TILE, LEGACY.opening).setDepth(5));
+        const leaf = scene.add.rectangle(x + gw / 2, bot - TILE / 2, gw, TILE, LEGACY.leaf).setDepth(6);
+        this.push(leaf);
+        this.doorGroups.push({ tiles: g, leaf });
+      }
     }
   }
 
@@ -454,7 +506,7 @@ export class TileArt {
       }
       const px = p.tx * TILE + (p.dx || 0);
       const py = (p.ty + 1) * TILE + (p.dy || 0);
-      const spr = scene.add.image(px, py, p.frame).setOrigin(0, 1);
+      const spr = scene.add.image(px, py, SPEC[p.frame].s, p.frame).setOrigin(0, 1);
       if (p.flip) spr.setFlipX(true);
       if (p.angle) spr.setRotation(Phaser.Math.DegToRad(p.angle));
       spr.setDepth(p.flat ? 50 : 100 + py + (p.dz || 0));

@@ -16,6 +16,12 @@
 // on room.js treating out-of-grid tiles as solid. If the player
 // can walk off the left or right edge in playtest, say the word
 // and I'll patch room.js to clamp.
+//
+// LAMP PASS (v0.03a): the two lamp-posts now mirror each other
+// (east one flipped), each lantern hangs off its own arm tip with
+// the tightened lantern-hanging crop, and the lantern lights sit
+// one row up, on the lamps themselves - the glow used to pool a
+// tile low, under the posts.
 
 export const STREET = {
   key: 'street',
@@ -36,10 +42,10 @@ export const STREET = {
     '...TTT..................TTT...',
     '...TTT......VVV...............',
     '.FFFFFFFFF..VVV.....FFFFFFFFF.',
-    'SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS',
+    'SSSSSSSSSSSSSSSSSSSSSSSSSSSSS',
     'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW',
-    'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW',
-    'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW'
+    'WWWWWWWWWWWWWWWWWWWWWWWWWWWWW',
+    'WWWWWWWWWWWWWWWWWWWWWWWWWWWWW'
   ],
 
   legend: {
@@ -66,8 +72,10 @@ export const STREET = {
   ambient: 0.6, // dusk on the street; lamps + windows lift it
 
   lights: [
-    { tx: 13, ty: 7, r: 55, color: 0xffc890, flicker: true }, // west lantern
-    { tx: 19, ty: 7, r: 55, color: 0xffc890, flicker: true }, // east lantern
+    // lantern glows sit ON the lamps (row 6); a row lower and the
+    // pool reads as coming from under the post
+    { tx: 13, ty: 6, r: 55, color: 0xffc890, flicker: true }, // west lantern
+    { tx: 16, ty: 6, r: 55, color: 0xffc890, flicker: true }, // east lantern
     { tx: 11, ty: 2, r: 40, color: 0xffd9a0 },               // tavern window glow
     { tx: 19, ty: 2, r: 40, color: 0xffd9a0 }                // tavern window glow
   ],
@@ -83,7 +91,7 @@ export const STREET = {
       { cols: [9, 20],  facade: 'facade-tavern' },  // the Anchor herself
       { cols: [24, 29], facade: 'facade-c' }        // harbor cottage
     ],
-    alleys: [ [6, 8], [21, 23] ] // drawn as dark recesses
+    alleys: [ [6, 8], [21, 23] ] // dressed as shadowed sidewalls by tileart
   },
 
   doors: { frame: 'door-blue' }, // blue metalwork, seen from outside
@@ -101,11 +109,13 @@ export const STREET = {
     { frame: 'window-c', tx: 18, ty: 3 },
     { frame: 'window-a', tx: 25, ty: 3 },
     { frame: 'window-b', tx: 27, ty: 3 },
-    // lamps flanking the Anchor's door
+    // lamps flanking the Anchor's door: posts mirror each other,
+    // lanterns hang off each arm's tip (dx/dy tuned to touch the
+    // bracket to the arm end - nudge freely, they're just offsets)
     { frame: 'lamp-post', tx: 11, ty: 8 },
-    { frame: 'lamp-post', tx: 17, ty: 8 },
-    { frame: 'lantern-hanging', tx: 13, ty: 7, dy: -6, dz: 1 },
-    { frame: 'lantern-hanging', tx: 19, ty: 7, dy: -6, dz: 1 },
+    { frame: 'lamp-post', tx: 17, ty: 8, flip: true },
+    { frame: 'lantern-hanging', tx: 13, ty: 7, dx: -3, dy: -8, dz: 1 },
+    { frame: 'lantern-hanging', tx: 16, ty: 7, dx: 6, dy: -8, dz: 1, flip: true },
     // clutter by the alley mouths
     { frame: 'barrel', tx: 8, ty: 5 },
     { frame: 'barrel', tx: 9, ty: 5 },

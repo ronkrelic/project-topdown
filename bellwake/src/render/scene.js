@@ -12,6 +12,12 @@
 //
 // v0.02a's stair hint text is gone on purpose: v0.03a has no
 // Undercroft stair, and area cards now do the announcing.
+//
+// v0.03a hotfix: the fixed-step loop passed STEP_MS (milliseconds)
+// to sim.step(), which works in seconds. Each step tried to move
+// ~1333px, the collider always landed outside the room, and the
+// Bellringer was pinned in place with his walk cycle playing. The
+// call now converts: sim.step(STEP_MS / 1000).
 
 import { TILE, tileCenter, Room } from '../sim/room.js';
 import { makeRoom } from '../sim/world.js';
@@ -97,7 +103,7 @@ export class SceneMain extends Phaser.Scene {
 
     this.acc = Math.min(this.acc + delta, MAX_FRAME_MS);
     while (this.acc >= STEP_MS) {
-      this.sim.step(STEP_MS);
+      this.sim.step(STEP_MS / 1000); // sim steps in seconds
       this.acc -= STEP_MS;
     }
 
