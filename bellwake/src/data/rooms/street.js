@@ -22,6 +22,9 @@
 // the tightened lantern-hanging crop, and the lantern lights sit
 // one row up, on the lamps themselves - the glow used to pool a
 // tile low, under the posts.
+// PATCH 4 (v0.03a): lantern-hanging recropped to bar + hanger +
+// body (7x19 in tileart SPEC) so it hangs off the arm tip; the
+// flicker bug is fixed in lighting.js; alleys got lit doorways.
 //
 // DOOR GLOW PASS (v0.03a patch 2): the Anchor's door reads from
 // outside now. doors.recess warms the "beyond the door" panel
@@ -90,7 +93,10 @@ export const STREET = {
     { tx: 19, ty: 2, r: 40, color: 0xffd9a0 },               // tavern window glow
     // steady, no flicker: reads as the common room's light
     // spilling out the open door onto the stoop, not another lamp
-    { tx: 15, ty: 4, r: 50, color: 0xffb070 }                // stoop pool
+    { tx: 15, ty: 4, r: 50, color: 0xffb070 },              // stoop pool
+    // alley doorways: a back door ajar, warm light behind it
+    { tx: 7, ty: 3, r: 35, color: 0xffb070 },               // west alley mouth
+    { tx: 22, ty: 3, r: 35, color: 0xffb070 }                // east alley mouth
   ],
 
   walls: null, // no interior band; the buildings carry the art
@@ -130,8 +136,8 @@ export const STREET = {
     // bracket to the arm end - nudge freely, they're just offsets)
     { frame: 'lamp-post', tx: 11, ty: 8 },
     { frame: 'lamp-post', tx: 17, ty: 8, flip: true },
-    { frame: 'lantern-hanging', tx: 13, ty: 7, dx: -3, dy: -8, dz: 1 },
-    { frame: 'lantern-hanging', tx: 16, ty: 7, dx: 6, dy: -8, dz: 1, flip: true },
+    { frame: 'lantern-hanging', tx: 12, ty: 7, dx: 12, dy: -9, dz: 1 },
+    { frame: 'lantern-hanging', tx: 16, ty: 7, dx: 12, dy: -9, dz: 1, flip: true },
     // clutter by the alley mouths
     { frame: 'barrel', tx: 8, ty: 5 },
     { frame: 'barrel', tx: 9, ty: 5 },
