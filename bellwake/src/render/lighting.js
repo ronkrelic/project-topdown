@@ -11,6 +11,18 @@
 //
 // Depths: overlay 800, glows 801, both above the world (props top out
 // around 700) and below the area title at 900.
+// The mood layer. One ambient darkness overlay sits over the whole
+// room (def.ambient, 0..1: tavern 0.45, street 0.6, Undercroft 0.5),
+// and additive radial glows punch warmth back through it. Lights
+// come from two places:
+//   - def.lights, the authored list: { tx, ty, r, color, flicker }
+//   - room.torches(), auto-lit so the Undercroft's T tiles glow
+//     without anyone hand-placing a light
+// Water shimmer moved to tileart.js (it belongs to the water); this
+// file is darkness and warmth, nothing else.
+//
+// Depths: overlay 800, glows 801, both above the world (props top out
+// around 700) and below the area title at 900.
 
 import { TILE } from '../sim/room.js';
 
@@ -86,10 +98,15 @@ export class Lighting {
     if (!l.flicker) return;
     // each flicker gets its own tempo so the room never pulses in
     // lockstep; hearth and lanterns breathe out of phase
+    // v0.03a patch 4: the { from, to } value form never showed in
+    // playtest (flicker lights stayed pitch dark while steady
+    // glows rendered), so set the low alpha directly and tween to
+    // a plain numeric target instead
     this.tweened.push(glow);
+    glow.setAlpha(GLOW_ALPHA * 0.75);
     scene.tweens.add({
       targets: glow,
-      alpha: { from: GLOW_ALPHA * 0.75, to: GLOW_ALPHA * 1.2 },
+      alpha: GLOW_ALPHA * 1.2,
       duration: 500 + (i % 5) * 130,
       yoyo: true,
       repeat: -1,
