@@ -63,8 +63,8 @@ export const TAVERN = {
   ambient: 0.45, // darkness over the hall; chandeliers + hearth lift it
 
   lights: [
-    { tx: 9,  ty: 4, r: 85, color: 0xffd9a0 },              // west chandelier
-    { tx: 20, ty: 4, r: 85, color: 0xffd9a0 },              // east chandelier
+    { tx: 9,  ty: 4, r: 105, color: 0xffd9a0 },              // west chandelier
+    { tx: 20, ty: 4, r: 105, color: 0xffd9a0 },              // east chandelier
     { tx: 25, ty: 5, r: 70, color: 0xff9a55, flicker: true } // hearth
   ],
 
