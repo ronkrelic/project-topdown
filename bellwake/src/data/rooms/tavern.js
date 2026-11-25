@@ -65,7 +65,8 @@ export const TAVERN = {
   lights: [
     { tx: 9,  ty: 4, r: 105, color: 0xffd9a0 },              // west chandelier
     { tx: 20, ty: 4, r: 105, color: 0xffd9a0 },              // east chandelier
-    { tx: 25, ty: 5, r: 70, color: 0xff9a55, flicker: true } // hearth
+    { tx: 25, ty: 5, r: 70, color: 0xff9a55, flicker: true }, // hearth
+    { tx: 14, ty: 15, r: 40, color: 0xffb070 }               // street light spilling over the threshold
   ],
 
   walls: {
@@ -78,7 +79,7 @@ export const TAVERN = {
     tex: 'int-wall-tex'
   },
 
-  doors: { frame: 'door-stone' }, // every doorway shares this look for now
+  doors: { frame: 'door-stone', recess: 0x5f4a30 }, // recess: the dusk street beyond, not a void
 
   waterSpec: null, // no water in the hall
 
@@ -145,7 +146,7 @@ export const TAVERN = {
     // floor dressing
     { frame: 'rug-green', tx: 8, ty: 13, flat: true },
     { frame: 'rug-olive', tx: 22, ty: 13, flat: true },
-    // the sign over the front door
-    { frame: 'sign-lettered', tx: 14, ty: 16 }
+    // the sign on the front wall, clear of the door
+    { frame: 'sign-lettered', tx: 18, ty: 16 }
   ]
 };
