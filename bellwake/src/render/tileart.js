@@ -10,14 +10,6 @@
 // (three empty cells -> black squares in the harbor) to the clean
 // y=96 row.
 //
-// STREET/DOORWAY PASS (v0.03a): sheet doors no longer sit over a
-// flat black opening - their own masonry surrounds do the work, and
-// door-stone is recropped to 48x50 so the sill's bottom row
-// survives. Alley slots are dressed as shadowed sidewalls instead
-// of raw black, row 0 gets a real roof band behind the eave, and
-// the lantern crop is tightened to the lamp itself (the old frame
-// hauled ~10px of empty sheet along).
-//
 // Sheets load as PLAIN IMAGES on purpose: the JSONs beside nine of
 // them are stale from the padded-export overwrite, so every frame
 // below is sliced by hand in SPEC. (Player atlases are the exception,
@@ -25,7 +17,7 @@
 //
 // Depth plan (lighting starts at 800, titles at 900):
 //   0 floors            1 water + shoreline      2 water glints
-//   3 alley sidewalls   4 facades, roof band, eave, legacy blocks
+//   3 alley slots       4 facades, eave, legacy blocks
 //   5 wall bands, door openings                   6 door leaves
 //   50 flat props (rugs and other floor dressing)
 //   100 + bottom-y     everything that y-sorts: props, the player
@@ -76,10 +68,7 @@ const SPEC = {
   'chandelier-simple':    { s: 'intprops', x: 208, y: 64,  w: 32, h: 32 },
   'chandelier-elaborate': { s: 'intprops', x: 240, y: 64,  w: 32, h: 32 },
   'hearth':               { s: 'intprops', x: 272, y: 48,  w: 48, h: 96 },
-  // 50 tall, not 48: the stone door's sill runs two rows past the
-  // old crop, and clipping it made the door look cut short at the
-  // floor
-  'door-stone':           { s: 'intprops', x: 272, y: 144, w: 48, h: 50 },
+  'door-stone':           { s: 'intprops', x: 272, y: 144, w: 48, h: 48 },
   'door-blue':            { s: 'intprops', x: 224, y: 208, w: 48, h: 48 },
   'rug-green':            { s: 'intprops', x: 336, y: 336, w: 48, h: 48 },
   'rug-olive':            { s: 'intprops', x: 384, y: 336, w: 48, h: 48 },
@@ -108,14 +97,10 @@ const SPEC = {
   'facade-c':             { s: 'bldgwalls', x: 288, y: 192, w: 96, h: 48 },
   'facade-d':             { s: 'bldgwalls', x: 384, y: 192, w: 96, h: 48 },
   'facade-e':             { s: 'bldgwalls', x: 480, y: 192, w: 96, h: 48 },
-  // left half of the vertical-plank panel: the alley sidewall
-  'alley-boards':         { s: 'bldgwalls', x: 192, y: 192, w: 48, h: 48 },
 
   // Roofs
-  'eave-trim':            { s: 'roofs', x: 0,  y: 240, w: 48, h: 16 },
-  'eave-toothed':         { s: 'roofs', x: 0,  y: 256, w: 48, h: 16 },
-  // roof surface that fills row 0 behind the eave
-  'roof-band':            { s: 'roofs', x: 32, y: 192, w: 64, h: 16 },
+  'eave-trim':            { s: 'roofs', x: 0, y: 240, w: 48, h: 16 },
+  'eave-toothed':         { s: 'roofs', x: 0, y: 256, w: 48, h: 16 },
 
   // Buildings Props
   'window-a':             { s: 'bldgprops', x: 64,  y: 64, w: 32, h: 32 },
@@ -126,12 +111,8 @@ const SPEC = {
   'fence-span':           { s: 'bldgprops', x: 16,  y: 176, w: 48, h: 16 },
 
   // Furniture
-  // lamp-post is the bare post + arm; the lantern hangs separately
-  // (frame below), off the arm's tip, placed in the room defs
   'lamp-post':            { s: 'furniture', x: 144, y: 448, w: 32, h: 48 },
-  // the lamp itself, bracket included - old crop carried ~10 empty
-  // rows below it, which shrank and floated the lantern
-  'lantern-hanging':      { s: 'furniture', x: 175, y: 450, w: 16, h: 22 },
+  'lantern-hanging':      { s: 'furniture', x: 176, y: 448, w: 16, h: 32 },
   'crate-open':           { s: 'furniture', x: 720, y: 64,  w: 16, h: 32 },
   'crate-slatted':        { s: 'furniture', x: 736, y: 64,  w: 16, h: 32 },
 
@@ -172,11 +153,6 @@ const LEGACY = {
   opening: 0x07090c,
   flame: 0xffa04a
 };
-
-// dusk shadow on the alley sidewalls so the slots read as turned
-// away from the light, not as more frontage. lighten toward
-// 0xffffff if they read too gloomy
-const ALLEY_TINT = 0x9aa1a9;
 
 // ------------------------------------------------- frame registration
 
@@ -390,7 +366,7 @@ export class TileArt {
     // side walls: texture crops between the bands
     for (let ty = w.north; ty < room.height - w.south; ty++) {
       for (const tx of [0, room.width - 1]) {
-        const v = (tx * 3 + ty * 7) % 6;
+        const v = (tx * 3 + ty * 7) % 2 ? 'b' : 'a';
         this.push(scene.add.image(tx * TILE + 8, ty * TILE + 8, 'intwalls', `int-wall-tex-${v}`).setDepth(5));
       }
     }
@@ -401,24 +377,16 @@ export class TileArt {
   drawBuildings() {
     const { room, scene } = this;
     const b = room.def.buildings;
-    // alleys first: the slots between facades, dressed as shadowed
-    // building sidewalls instead of flat black holes
+    // alleys first: dark slots the facades never cover
     for (const [c0, c1] of b.alleys) {
-      for (let x = c0 * TILE; x <= c1 * TILE; x += 48) {
-        this.push(scene.add.image(x, TILE, 'bldgwalls', 'alley-boards')
-          .setOrigin(0, 0).setDepth(3).setTint(ALLEY_TINT));
-      }
+      const cw = (c1 - c0 + 1) * TILE;
+      this.push(scene.add.rectangle((c0 * TILE) + cw / 2, 32, cw, 4 * TILE, 0x0a0c10).setDepth(3));
     }
     // facades: 96x48 strips tiled across each block, rows 1-3
     for (const blk of b.blocks) {
       for (let x = blk.cols[0] * TILE; x <= blk.cols[1] * TILE; x += 96) {
         this.push(scene.add.image(x, TILE, SPEC[blk.facade].s, blk.facade).setOrigin(0, 0).setDepth(4));
       }
-    }
-    // the roof surface behind the eave: row 0 gets real roof so the
-    // strip above the facades isn't raw background
-    for (let x = 0; x < room.width * TILE; x += 64) {
-      this.push(scene.add.image(x, 0, 'roofs', 'roof-band').setOrigin(0, 0).setDepth(4));
     }
     // the roofline: trim with toothed eave over row 0
     for (let x = 0; x < room.width * TILE; x += 48) {
@@ -460,24 +428,15 @@ export class TileArt {
       const x = minX * TILE;
       const bot = (maxY + 1) * TILE;
       const gw = (maxX - minX + 1) * TILE;
-      if (want) {
-        // Sheet doors carry their own masonry surround, sill and
-        // shadows, and their frames stand taller than the doorway's
-        // tile span (door-stone is 48x50). No flat black behind
-        // them: the wall band or facade shows through the sprite's
-        // transparent side margins, so the door sits IN the wall
-        // instead of floating over a void.
-        const leaf = scene.add.image(x, bot, SPEC[want].s, want)
-          .setOrigin(0, 1).setDepth(6);
-        this.push(leaf);
-        this.doorGroups.push({ tiles: g, leaf });
-      } else {
-        // legacy rooms (the Undercroft) keep the flat-color pair
-        this.push(scene.add.rectangle(x + gw / 2, bot - TILE / 2, gw, TILE, LEGACY.opening).setDepth(5));
-        const leaf = scene.add.rectangle(x + gw / 2, bot - TILE / 2, gw, TILE, LEGACY.leaf).setDepth(6);
-        this.push(leaf);
-        this.doorGroups.push({ tiles: g, leaf });
-      }
+      // our doors are 3 tiles wide and the frames are 48x48, so the
+      // leaf covers the doorway and then some upward (the recess)
+      const gh = want ? 48 : TILE;
+      this.push(scene.add.rectangle(x + gw / 2, bot - gh / 2, gw, gh, LEGACY.opening).setDepth(5));
+      const leaf = want
+        ? scene.add.image(x, bot, SPEC[want].s, want).setOrigin(0, 1).setDepth(6)
+        : scene.add.rectangle(x + gw / 2, bot - gh / 2, gw, gh, LEGACY.leaf).setDepth(6);
+      this.push(leaf);
+      this.doorGroups.push({ tiles: g, leaf });
     }
   }
 

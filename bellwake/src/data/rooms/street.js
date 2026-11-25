@@ -22,6 +22,16 @@
 // the tightened lantern-hanging crop, and the lantern lights sit
 // one row up, on the lamps themselves - the glow used to pool a
 // tile low, under the posts.
+//
+// DOOR GLOW PASS (v0.03a patch 2): the Anchor's door reads from
+// outside now. doors.recess warms the "beyond the door" panel
+// tileart paints behind the leaf, so the open doorway glows like
+// the common room is lit behind it, and a steady pool sits on the
+// stoop - no door in any sheet has a lit window, so warm recess +
+// stoop light is the dusk visibility plan. also: grid rows 13, 15
+// and 16 were one character short (29 vs 30), which dropped the
+// far-east column of the shore and water off-grid into a black
+// notch at the SE corner. all rows padded to 30.
 
 export const STREET = {
   key: 'street',
@@ -44,8 +54,8 @@ export const STREET = {
     '.FFFFFFFFF..VVV.....FFFFFFFFF.',
     'SSSSSSSSSSSSSSSSSSSSSSSSSSSSS',
     'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW',
-    'WWWWWWWWWWWWWWWWWWWWWWWWWWWWW',
-    'WWWWWWWWWWWWWWWWWWWWWWWWWWWWW'
+    'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW',
+    'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW'
   ],
 
   legend: {
@@ -77,7 +87,10 @@ export const STREET = {
     { tx: 13, ty: 6, r: 55, color: 0xffc890, flicker: true }, // west lantern
     { tx: 16, ty: 6, r: 55, color: 0xffc890, flicker: true }, // east lantern
     { tx: 11, ty: 2, r: 40, color: 0xffd9a0 },               // tavern window glow
-    { tx: 19, ty: 2, r: 40, color: 0xffd9a0 }                // tavern window glow
+    { tx: 19, ty: 2, r: 40, color: 0xffd9a0 },               // tavern window glow
+    // steady, no flicker: reads as the common room's light
+    // spilling out the open door onto the stoop, not another lamp
+    { tx: 15, ty: 4, r: 50, color: 0xffb070 }                // stoop pool
   ],
 
   walls: null, // no interior band; the buildings carry the art
@@ -94,7 +107,10 @@ export const STREET = {
     alleys: [ [6, 8], [21, 23] ] // dressed as shadowed sidewalls by tileart
   },
 
-  doors: { frame: 'door-blue' }, // blue metalwork, seen from outside
+  // blue metalwork, seen from outside. recess = what tileart
+  // paints behind the leaf: warm, the common room lit behind the
+  // open door (tileart's default is dim dusk)
+  doors: { frame: 'door-blue', recess: 0x8a5a28 },
 
   waterSpec: { style: 'harbor', shimmer: true },
 
