@@ -120,7 +120,7 @@ const SPEC = {
 
   // Furniture
   'lamp-post':            { s: 'furniture', x: 144, y: 448, w: 32, h: 48 },
-  'lantern-hanging':      { s: 'furniture', x: 176, y: 448, w: 16, h: 32 },
+  'lantern-hanging':      { s: 'furniture', x: 180, y: 452, w: 7, h: 19 },
   'crate-open':           { s: 'furniture', x: 720, y: 64,  w: 16, h: 32 },
   'crate-slatted':        { s: 'furniture', x: 736, y: 64,  w: 16, h: 32 },
 
@@ -390,10 +390,19 @@ export class TileArt {
   drawBuildings() {
     const { room, scene } = this;
     const b = room.def.buildings;
-    // alleys first: dark slots the facades never cover
+    // alleys first: a shadowed board wall with one lit open
+    // doorway, so the gap reads as a passage, not a hole
     for (const [c0, c1] of b.alleys) {
+      const ax = c0 * TILE;
       const cw = (c1 - c0 + 1) * TILE;
-      this.push(scene.add.rectangle((c0 * TILE) + cw / 2, 32, cw, 4 * TILE, 0x0a0c10).setDepth(3));
+      for (let x = 0; x < cw; x += 32) {
+        const frame = (cw - x) >= 32 ? 'int-wall-panel' : 'int-wall-side-a';
+        this.push(scene.add.image(ax + x, TILE, 'intwalls', frame)
+          .setOrigin(0, 0).setTint(0x6e7480).setDepth(3));
+      }
+      const dx = ax + cw / 2;
+      this.push(scene.add.rectangle(dx, 48, 24, 32, 0x11141a).setDepth(3));
+      this.push(scene.add.rectangle(dx, 50, 16, 24, 0x8a5a28).setDepth(3));
     }
     // facades: 96x48 strips tiled across each block, rows 1-3
     for (const blk of b.blocks) {
