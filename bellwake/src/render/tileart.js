@@ -89,6 +89,14 @@ const SPEC = {
   // Interior Walls
   'int-wall-cap':         { s: 'intwalls', x: 384, y: 0,  w: 96, h: 32 },
   'int-wall-face':        { s: 'intwalls', x: 384, y: 32, w: 96, h: 16 },
+  // measured off the sheet (walls study, Nov 24): the 416,96 window
+  // is solid warm boards - rail at +24, wainscot at +30, trim at +43.
+  // beam: solid timber only y1..y8; y0 is outline, y9+ is cutaway.
+  'int-wall-panel':       { s: 'intwalls', x: 416, y: 96,  w: 32, h: 48 },
+  'int-wall-beam':        { s: 'intwalls', x: 400, y: 1,   w: 64, h: 8 },
+  'int-wall-side-a':      { s: 'intwalls', x: 416, y: 96,  w: 16, h: 48 },
+  'int-wall-side-b':      { s: 'intwalls', x: 432, y: 96,  w: 16, h: 48 },
+  'int-wall-base':        { s: 'intwalls', x: 416, y: 128, w: 32, h: 16 },
 
   // Buildings Walls, facade strips
   'facade-a':             { s: 'bldgwalls', x: 0,   y: 192, w: 96, h: 48 },
@@ -153,6 +161,11 @@ const LEGACY = {
   opening: 0x07090c,
   flame: 0xffa04a
 };
+
+// Default color behind a sheet-door leaf (the recess the frame sits
+// in). Rooms override with doors.recess; the street asks for warm
+// light spilling out of the common room.
+const DOOR_RECESS = 0x161c24;
 
 // ------------------------------------------------- frame registration
 
@@ -348,26 +361,26 @@ export class TileArt {
     const { room, scene } = this;
     const w = room.def.walls;
     const W = room.width * TILE, H = room.height * TILE;
-    // north band: 2 rows of cap, then face rows (ours is cap 2 + face 1)
-    for (let x = 0; x < W; x += 96) {
-      this.push(scene.add.image(x, 0, 'intwalls', w.cap).setOrigin(0, 0).setDepth(5));
+    // north band: the warm panel (32x48) tiled across, sized for a
+    // 3-row band; a beam cornice rides along the top of it
+    for (let x = 0; x < W; x += 32) {
+      this.push(scene.add.image(x, 0, 'intwalls', 'int-wall-panel').setOrigin(0, 0).setDepth(5));
     }
-    for (let r = 0; r < Math.max(0, w.north - 2); r++) {
-      for (let x = 0; x < W; x += 96) {
-        this.push(scene.add.image(x, 32 + r * TILE, 'intwalls', w.face).setOrigin(0, 0).setDepth(5));
-      }
+    for (let x = 0; x < W; x += 64) {
+      this.push(scene.add.image(x, 0, 'intwalls', 'int-wall-beam').setOrigin(0, 0).setDepth(5));
     }
-    // south band: the face flipped, along the bottom edge
-    if (w.south) {
-      for (let x = 0; x < W; x += 96) {
-        this.push(scene.add.image(x, H - w.south * TILE, 'intwalls', w.face).setOrigin(0, 0).setFlipY(true).setDepth(5));
-      }
-    }
-    // side walls: texture crops between the bands
-    for (let ty = w.north; ty < room.height - w.south; ty++) {
+    // side walls: 16x48 board slices hashed a/b, stepped 3 rows so
+    // the 48px art tiles the column (the south band covers the seam)
+    for (let ty = w.north; ty < room.height - w.south; ty += 3) {
       for (const tx of [0, room.width - 1]) {
         const v = (tx * 3 + ty * 7) % 2 ? 'b' : 'a';
-        this.push(scene.add.image(tx * TILE + 8, ty * TILE + 8, 'intwalls', `int-wall-tex-${v}`).setDepth(5));
+        this.push(scene.add.image(tx * TILE, ty * TILE, 'intwalls', `int-wall-side-${v}`).setOrigin(0, 0).setDepth(5));
+      }
+    }
+    // south band: baseboard strip along the bottom edge
+    if (w.south) {
+      for (let x = 0; x < W; x += 32) {
+        this.push(scene.add.image(x, H - w.south * TILE, 'intwalls', 'int-wall-base').setOrigin(0, 0).setDepth(5));
       }
     }
   }
@@ -430,8 +443,11 @@ export class TileArt {
       const gw = (maxX - minX + 1) * TILE;
       // our doors are 3 tiles wide and the frames are 48x48, so the
       // leaf covers the doorway and then some upward (the recess)
-      const gh = want ? 48 : TILE;
-      this.push(scene.add.rectangle(x + gw / 2, bot - gh / 2, gw, gh, LEGACY.opening).setDepth(5));
+      const gh = want ? SPEC[want].h : TILE;
+      const recess = want
+        ? (room.def.doors && room.def.doors.recess != null ? room.def.doors.recess : DOOR_RECESS)
+        : LEGACY.opening;
+      this.push(scene.add.rectangle(x + gw / 2, bot - gh / 2, gw, gh, recess).setDepth(5));
       const leaf = want
         ? scene.add.image(x, bot, SPEC[want].s, want).setOrigin(0, 1).setDepth(6)
         : scene.add.rectangle(x + gw / 2, bot - gh / 2, gw, gh, LEGACY.leaf).setDepth(6);
